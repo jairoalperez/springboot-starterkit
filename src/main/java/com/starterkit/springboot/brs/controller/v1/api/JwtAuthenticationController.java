@@ -62,7 +62,7 @@ public class JwtAuthenticationController {
                     .compact();
             ;
         }
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(TOKEN_PREFIX+token);
 
     }
 
