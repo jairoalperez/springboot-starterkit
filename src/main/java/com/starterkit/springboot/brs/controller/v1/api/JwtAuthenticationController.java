@@ -1,7 +1,9 @@
 package com.starterkit.springboot.brs.controller.v1.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.gson.Gson;
 import com.starterkit.springboot.brs.config.FakeController;
+import com.starterkit.springboot.brs.controller.v1.response.LoginResponse;
 import com.starterkit.springboot.brs.security.CustomUserDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -43,8 +45,17 @@ public class JwtAuthenticationController {
 
     @RequestMapping(value ="/authenticate", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<?> createAuthToken(@RequestBody @Valid LoginRequest loginRequest) throws Exception {
-        authernticate(loginRequest.getEmail(),loginRequest.getPassword());
+    public ResponseEntity<?> createAuthToken(@RequestBody @Valid LoginRequest loginRequest)  {
+        LoginResponse loginResponse = new LoginResponse();
+
+        try{
+            authernticate(loginRequest.getEmail(),loginRequest.getPassword());
+        }catch (Exception ee){
+            loginResponse.setResponse(ee.getMessage());
+            loginResponse.setStatus("error");
+            return  ResponseEntity.accepted().body(loginResponse);
+        }
+
         final UserDetails user = userDetailsService.loadUserByUsername(loginRequest.email);
         // generate the token
         // return that to the cleint
@@ -62,7 +73,10 @@ public class JwtAuthenticationController {
                     .compact();
             ;
         }
-        return ResponseEntity.ok(TOKEN_PREFIX+token);
+        loginResponse.setResponse(token);
+        loginResponse.setStatus("success");
+//        return ResponseEntity.ok(TOKEN_PREFIX+token);
+        return  ResponseEntity.accepted().body(loginResponse);
 
     }
 
