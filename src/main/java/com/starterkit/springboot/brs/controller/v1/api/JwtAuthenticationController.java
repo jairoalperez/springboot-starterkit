@@ -42,16 +42,52 @@ public class JwtAuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+
+    @Autowired
+    private  org.modelmapper.ModelMapper modelMapper;
+
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
 
+    @Autowired
+    private  com.starterkit.springboot.brs.service.UserService userService;
 
     @PostMapping("/profile")
-    public  ResponseEntity<?> getProfile(@Valid @RequestBody ProfileRequest profileRequest){
+    public  ResponseEntity<?> getProfile( org.springframework.security.core.Authentication authentication, java.security.Principal principal,@Valid @RequestBody ProfileRequest profileRequest){
+        com.starterkit.springboot.brs.dto.model.user.UserDto userDto= new com.starterkit.springboot.brs.dto.model.user.UserDto();
         String token = profileRequest.getToken();
+        if (token != null) {
+            Claims claims = Jwts.parser()
+                    .setSigningKey(SECRET)
+                    .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
+                    .getBody();
+            // Extract the UserName
+            String user = claims.getSubject();
 
-        return  ResponseEntity.ok(token);
+            userDto=  userService.findUserByEmail(user);
+
+        }
+
+
+
+//            // Extract the Roles
+//            ArrayList<String> roles = (ArrayList<String>) claims.get("roles");
+//            // Then convert Roles to GrantedAuthority Object for injecting
+//            ArrayList<org.springframework.security.core.GrantedAuthority> list = new ArrayList<>();
+//            if (roles != null) {
+//                for (String a : roles) {
+//                    GrantedAuthority g = new SimpleGrantedAuthority(a);
+//                    list.add(g);
+//                }
+//            }
+//            if (user != null) {
+//                return new UsernamePasswordAuthenticationToken(user, null, list);
+//            }
+//            return null;
+//        }
+
+        return  ResponseEntity.ok(userDto);
     }
 
     @RequestMapping(value ="/authenticate", method = RequestMethod.POST)
@@ -68,6 +104,8 @@ public class JwtAuthenticationController {
         }
 
         final UserDetails user = userDetailsService.loadUserByUsername(loginRequest.email);
+        com.starterkit.springboot.brs.dto.model.user.UserDto userDetail=
+        userService.findUserByEmail(loginRequest.email);
         // generate the token
         // return that to the cleint
         String token= "";
@@ -85,6 +123,7 @@ public class JwtAuthenticationController {
             ;
         }
         loginResponse.setResponse(token);
+        loginResponse.setUser(userDetail);
         loginResponse.setStatus("success");
 //        return ResponseEntity.ok(TOKEN_PREFIX+token);
         return  ResponseEntity.accepted().body(loginResponse);

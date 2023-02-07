@@ -22,6 +22,7 @@ import java.util.Set;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
     private String email;
+    private String profilePicture;
     private String password;
     private String firstName;
     private String lastName;

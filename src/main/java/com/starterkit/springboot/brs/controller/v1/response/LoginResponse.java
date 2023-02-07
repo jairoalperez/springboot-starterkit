@@ -6,4 +6,5 @@ import lombok.Data;
 public class LoginResponse {
     private  String status;
     private  Object response;
+    private com.starterkit.springboot.brs.dto.model.user.UserDto user;
 }

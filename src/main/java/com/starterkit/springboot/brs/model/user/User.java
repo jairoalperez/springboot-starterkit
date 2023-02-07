@@ -26,6 +26,8 @@ public class User {
     @Id
     private String id;
 
+    private String profilePicture;
+
     @Indexed(unique = true, direction = IndexDirection.DESCENDING)
     private String email;
 
