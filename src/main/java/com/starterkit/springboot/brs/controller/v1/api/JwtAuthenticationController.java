@@ -3,12 +3,14 @@ package com.starterkit.springboot.brs.controller.v1.api;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.gson.Gson;
 import com.starterkit.springboot.brs.config.FakeController;
+import com.starterkit.springboot.brs.controller.v1.request.ProfileRequest;
 import com.starterkit.springboot.brs.controller.v1.response.LoginResponse;
 import com.starterkit.springboot.brs.security.CustomUserDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.Authorization;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -42,6 +44,15 @@ public class JwtAuthenticationController {
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
+
+
+
+    @PostMapping("/profile")
+    public  ResponseEntity<?> getProfile(@Valid @RequestBody ProfileRequest profileRequest){
+        String token = profileRequest.getToken();
+
+        return  ResponseEntity.ok(token);
+    }
 
     @RequestMapping(value ="/authenticate", method = RequestMethod.POST)
     @ResponseBody

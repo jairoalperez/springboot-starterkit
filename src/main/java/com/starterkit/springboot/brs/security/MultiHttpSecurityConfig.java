@@ -55,6 +55,7 @@ public class MultiHttpSecurityConfig {
                     .csrf()
                     .disable()
                     .antMatcher("/api/**")
+                    .antMatcher("/apiauth/**")
                     .authorizeRequests()
                     .antMatchers("/api/v1/user/signup").permitAll()
                     .antMatchers("/apiauth/authenticate").permitAll()
