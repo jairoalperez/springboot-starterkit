@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
             if (userDto.isAdmin()) {
                 userRole = roleRepository.findByRole(UserRoles.ADMIN.name());
             } else {
-                userRole = roleRepository.findByRole(UserRoles.PASSENGER.name());
+                userRole = roleRepository.findByRole(UserRoles.MENTOR.name());
             }
             user = new User()
                     .setEmail(userDto.getEmail())
@@ -74,7 +74,8 @@ public class UserServiceImpl implements UserService {
     public UserDto findUserByEmail(String email) {
         Optional<User> user = Optional.ofNullable(userRepository.findByEmail(email));
         if (user.isPresent()) {
-            return modelMapper.map(user.get(), UserDto.class);
+            return  UserMapper.toUserDto(user.get());
+            //return modelMapper.map(, UserDto.class);
         }
         throw exception(USER, ENTITY_NOT_FOUND, email);
     }

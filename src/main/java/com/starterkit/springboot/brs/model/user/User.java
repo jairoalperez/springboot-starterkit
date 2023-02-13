@@ -42,6 +42,9 @@ public class User {
     @DBRef
     private Set<Role> roles;
 
+    @DBRef
+    private  Set<UserProfile> userProfiles;
+
     public String getFullName() {
         return firstName != null ? firstName.concat(" ").concat(lastName) : "";
     }

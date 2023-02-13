@@ -1,9 +1,9 @@
 package com.starterkit.springboot.brs;
 
 import com.starterkit.springboot.brs.model.bus.*;
-import com.starterkit.springboot.brs.model.user.Role;
-import com.starterkit.springboot.brs.model.user.User;
+import com.starterkit.springboot.brs.model.user.*;
 import com.starterkit.springboot.brs.repository.bus.*;
+import com.starterkit.springboot.brs.repository.user.ProfileRepository;
 import com.starterkit.springboot.brs.repository.user.RoleRepository;
 import com.starterkit.springboot.brs.repository.user.UserRepository;
 import com.starterkit.springboot.brs.util.DateUtils;
@@ -11,9 +11,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @SpringBootApplication
@@ -24,128 +26,205 @@ public class BusReservationSystemApplication {
     }
 
     @Bean
-    CommandLineRunner init(RoleRepository roleRepository, UserRepository userRepository,
+    CommandLineRunner init(ProfileRepository profileRepository, RoleRepository roleRepository, UserRepository userRepository,
                            StopRepository stopRepository, AgencyRepository agencyRepository,
                            BusRepository busRepository, TripRepository tripRepository,
                            TripScheduleRepository tripScheduleRepository) {
 
 
         return args -> {
-            //Create Admin and Passenger Roles
-            Role adminRole = roleRepository.findByRole("ADMIN");
-            if (adminRole == null) {
-                adminRole = new Role();
-                adminRole.setRole("ADMIN");
-                roleRepository.save(adminRole);
-            }
 
-            Role userRole = roleRepository.findByRole("PASSENGER");
-            if (userRole == null) {
-                userRole = new Role();
-                userRole.setRole("PASSENGER");
-                roleRepository.save(userRole);
-            }
+            if (true){
 
-            //Create an Admin user
-            User admin = userRepository.findByEmail("admin.agencya@gmail.com");
-            if (admin == null) {
-                admin = new User()
-                        .setEmail("admin.agencya@gmail.com")
-                        .setPassword("$2a$10$7PtcjEnWb/ZkgyXyxY1/Iei2dGgGQUbqIIll/dt.qJ8l8nQBWMbYO") // "123456"
-                        .setFirstName("John")
-                        .setLastName("Doe")
-                        .setMobileNumber("9425094250")
-                        .setRoles(new HashSet<>(Arrays.asList(adminRole)));
-                userRepository.save(admin);
-            }
+                Role participantRole = roleRepository.findByRole("PARTICIPANT");
+                if (participantRole == null) {
+                    participantRole = new Role();
+                    participantRole.setRole("PARTICIPANT");
+                    roleRepository.save(participantRole);
+                }
+                User admin = userRepository.findByEmail("dheeraj1@gmail.com");
+                if (admin == null) {
 
-            //Create four stops
-            Stop stopA = stopRepository.findByCode("STPA");
-            if (stopA == null) {
-                stopA = new Stop()
-                        .setName("Stop A")
-                        .setDetail("Near hills")
-                        .setCode("STPA");
-                stopRepository.save(stopA);
-            }
+                    Set<UserProfile> userProfiles = new HashSet<>();
+                    UserProfile userProfile = new UserProfile();
 
-            Stop stopB = stopRepository.findByCode("STPB");
-            if (stopB == null) {
-                stopB = new Stop()
-                        .setName("Stop B")
-                        .setDetail("Near river")
-                        .setCode("STPB");
-                stopRepository.save(stopB);
-            }
 
-            Stop stopC = stopRepository.findByCode("STPC");
-            if (stopC == null) {
-                stopC = new Stop()
-                        .setName("Stop C")
-                        .setDetail("Near desert")
-                        .setCode("STPC");
-                stopRepository.save(stopC);
-            }
+                    Experience experience = new Experience();
+                    experience.setYears(2);
+                    experience.setName("Developer Experience");
 
-            Stop stopD = stopRepository.findByCode("STPD");
-            if (stopD == null) {
-                stopD = new Stop()
-                        .setName("Stop D")
-                        .setDetail("Near lake")
-                        .setCode("STPD");
-                stopRepository.save(stopD);
-            }
+                    Project project = new Project();
+                    project.setResponsibilities("team lead developing prodctus");
+                    project.setTechStack("SPRING BOOT REACT");
+                    project.setRoles("Lead");
+                    project.setResponsibilities("fjsfdlkjgfsldkjglksjfdg");
+                    project.setDetails("some Details");
 
-            //Create an Agency
-            Agency agencyA = agencyRepository.findByCode("AGENCYA");
-            if (agencyA == null) {
-                agencyA = new Agency()
-                        .setName("Green Mile Agency")
-                        .setCode("AGENCYA")
-                        .setDetails("Reaching desitnations with ease")
-                        .setOwner(admin);
-                agencyRepository.save(agencyA);
-            }
 
-            //Create a bus
-            Bus busA = busRepository.findByCode("AGENCYA-1");
-            if (busA == null) {
-                busA = new Bus()
-                        .setCode("AGENCYA-1")
-                        .setAgency(agencyA)
-                        .setCapacity(60);
-                busRepository.save(busA);
-            }
+                    Education education = new Education();
+                    education.setCity("education city");
+                    education.setCountry("education country");
+                    education.setName("Greaducation");
+                    education.setUniversity("Some University");
 
-            //Add busA to set of buses owned by Agency 'AGENCYA'
-            if (agencyA.getBuses() == null) {
-                Set<Bus> buses = new HashSet<>();
-                agencyA.setBuses(buses);
-                agencyA.getBuses().add(busA);
-                agencyRepository.save(agencyA);
-            }
 
-            //Create a Trip
-            Trip trip = tripRepository.findBySourceStopAndDestStopAndBus(stopA, stopB, busA);
-            if (trip == null) {
-                trip = new Trip()
-                        .setSourceStop(stopA)
-                        .setDestStop(stopB)
-                        .setBus(busA)
-                        .setAgency(agencyA)
-                        .setFare(100)
-                        .setJourneyTime(60);
-                tripRepository.save(trip);
-            }
+                Set<Education> educations = new HashSet<>();
+                Set<Experience> experiences = new HashSet<>();
+                Set<Project> projects = new HashSet<>();
 
-            //Create a trip schedule
-            TripSchedule tripSchedule = tripScheduleRepository.findByTripDetailAndTripDate(trip, DateUtils.todayStr());
-            if (tripSchedule == null) {
-                tripSchedule = new TripSchedule()
-                        .setTripDetail(trip)
-                        .setTripDate(DateUtils.todayStr())
-                        .setAvailableSeats(trip.getBus().getCapacity());
-                tripScheduleRepository.save(tripSchedule);
+                educations.add(education);
+                experiences.add(experience);
+                projects.add(project);
+
+                    Optional<UserProfile> userProfileOptional= profileRepository.findByName("dheeraj1@gmail.com"+"p1");
+                    if (!userProfileOptional.isPresent()){
+                         userProfile = new UserProfile();
+                        userProfile.setStackOverflow("Stack");
+                        userProfile.setExperience(experiences);
+                        userProfile.setGithub("github");
+                        userProfile.setProjects(projects);
+                        userProfile.setLinkedIn("Linked in ");
+                        userProfile.setName("dheeraj1@gmail.com"+"p1");
+                        userProfile.setEducation(educations);
+                        userProfile = profileRepository.save(userProfile);
+                    }
+                    userProfiles.add(userProfile);
+                    admin = new User()
+                            .setEmail("dheeraj1@gmail.com")
+                            .setPassword(new BCryptPasswordEncoder().encode("123456")) // "123456"
+                            .setFirstName("Dheeraj")
+                            .setLastName("Singh")
+                            .setMobileNumber("123456789")
+                            .setProfilePicture("https://avatars.githubusercontent.com/u/32265439?v=4")
+                            .setUserProfiles(userProfiles)
+                            .setRoles(new HashSet<>(Arrays.asList(participantRole)));
+                    userRepository.save(admin);
+                }
+
+
+
+
+            }else {
+
+
+                //Create Admin and Passenger Roles
+                Role adminRole = roleRepository.findByRole("ADMIN");
+                if (adminRole == null) {
+                    adminRole = new Role();
+                    adminRole.setRole("ADMIN");
+                    roleRepository.save(adminRole);
+                }
+
+
+
+                Role userRole = roleRepository.findByRole("PASSENGER");
+                if (userRole == null) {
+                    userRole = new Role();
+                    userRole.setRole("PASSENGER");
+                    roleRepository.save(userRole);
+                }
+
+                //Create an Admin user
+                User admin = userRepository.findByEmail("admin.agencya@gmail.com");
+                if (admin == null) {
+                    admin = new User()
+                            .setEmail("admin.agencya@gmail.com")
+                            .setPassword("$2a$10$7PtcjEnWb/ZkgyXyxY1/Iei2dGgGQUbqIIll/dt.qJ8l8nQBWMbYO") // "123456"
+                            .setFirstName("John")
+                            .setLastName("Doe")
+                            .setMobileNumber("9425094250")
+                            .setRoles(new HashSet<>(Arrays.asList(adminRole)));
+                    userRepository.save(admin);
+                }
+
+                //Create four stops
+                Stop stopA = stopRepository.findByCode("STPA");
+                if (stopA == null) {
+                    stopA = new Stop()
+                            .setName("Stop A")
+                            .setDetail("Near hills")
+                            .setCode("STPA");
+                    stopRepository.save(stopA);
+                }
+
+                Stop stopB = stopRepository.findByCode("STPB");
+                if (stopB == null) {
+                    stopB = new Stop()
+                            .setName("Stop B")
+                            .setDetail("Near river")
+                            .setCode("STPB");
+                    stopRepository.save(stopB);
+                }
+
+                Stop stopC = stopRepository.findByCode("STPC");
+                if (stopC == null) {
+                    stopC = new Stop()
+                            .setName("Stop C")
+                            .setDetail("Near desert")
+                            .setCode("STPC");
+                    stopRepository.save(stopC);
+                }
+
+                Stop stopD = stopRepository.findByCode("STPD");
+                if (stopD == null) {
+                    stopD = new Stop()
+                            .setName("Stop D")
+                            .setDetail("Near lake")
+                            .setCode("STPD");
+                    stopRepository.save(stopD);
+                }
+
+                //Create an Agency
+                Agency agencyA = agencyRepository.findByCode("AGENCYA");
+                if (agencyA == null) {
+                    agencyA = new Agency()
+                            .setName("Green Mile Agency")
+                            .setCode("AGENCYA")
+                            .setDetails("Reaching desitnations with ease")
+                            .setOwner(admin);
+                    agencyRepository.save(agencyA);
+                }
+
+                //Create a bus
+                Bus busA = busRepository.findByCode("AGENCYA-1");
+                if (busA == null) {
+                    busA = new Bus()
+                            .setCode("AGENCYA-1")
+                            .setAgency(agencyA)
+                            .setCapacity(60);
+                    busRepository.save(busA);
+                }
+
+                //Add busA to set of buses owned by Agency 'AGENCYA'
+                if (agencyA.getBuses() == null) {
+                    Set<Bus> buses = new HashSet<>();
+                    agencyA.setBuses(buses);
+                    agencyA.getBuses().add(busA);
+                    agencyRepository.save(agencyA);
+                }
+
+                //Create a Trip
+                Trip trip = tripRepository.findBySourceStopAndDestStopAndBus(stopA, stopB, busA);
+                if (trip == null) {
+                    trip = new Trip()
+                            .setSourceStop(stopA)
+                            .setDestStop(stopB)
+                            .setBus(busA)
+                            .setAgency(agencyA)
+                            .setFare(100)
+                            .setJourneyTime(60);
+                    tripRepository.save(trip);
+                }
+
+                //Create a trip schedule
+                TripSchedule tripSchedule = tripScheduleRepository.findByTripDetailAndTripDate(trip, DateUtils.todayStr());
+                if (tripSchedule == null) {
+                    tripSchedule = new TripSchedule()
+                            .setTripDetail(trip)
+                            .setTripDate(DateUtils.todayStr())
+                            .setAvailableSeats(trip.getBus().getCapacity());
+                    tripScheduleRepository.save(tripSchedule);
+                }
             }
         };
     }

@@ -2,6 +2,7 @@ package com.starterkit.springboot.brs.dto.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.starterkit.springboot.brs.model.user.UserProfile;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,7 +30,7 @@ public class UserDto {
     private String mobileNumber;
     private boolean isAdmin;
     private Set<RoleDto> roles;
-
+    private Set<UserProfileDto> userProfile;
     public String getFullName() {
         return firstName != null ? firstName.concat(" ").concat(lastName) : "";
     }

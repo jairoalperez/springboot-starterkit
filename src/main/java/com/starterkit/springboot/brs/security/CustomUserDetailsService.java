@@ -28,6 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserDto userDto = userService.findUserByEmail(email);
+
         if (userDto != null) {
             List<GrantedAuthority> authorities = getUserAuthority(userDto.getRoles());
             return buildUserForAuthentication(userDto, authorities);
