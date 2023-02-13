@@ -56,8 +56,9 @@ public class MultiHttpSecurityConfig {
                     .disable()
                     .antMatcher("/api/**")
                     .antMatcher("/apiauth/**")
+
                     .authorizeRequests()
-                    .antMatchers("/api/authenticate").permitAll()
+                    .antMatchers("/apiauth/authenticate").permitAll()
                     .anyRequest()
                     .authenticated()
                     .and()
