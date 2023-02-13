@@ -60,7 +60,10 @@ public class ApiJWTAuthorizationFilter extends BasicAuthenticationFilter {
                 }
             }
             if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, list);
+                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken=  new UsernamePasswordAuthenticationToken(user, null, list);
+                // initialize the security context holder
+                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                return usernamePasswordAuthenticationToken;
             }
             return null;
         }

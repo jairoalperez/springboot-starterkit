@@ -31,7 +31,7 @@ public class ApiJWTAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     public ApiJWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
-        this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/api/auth", "POST"));
+        this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/api/v1/user/signup", "POST"));
     }
 
     @Override

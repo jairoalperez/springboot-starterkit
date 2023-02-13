@@ -28,6 +28,8 @@ public class BusReservationSystemApplication {
                            StopRepository stopRepository, AgencyRepository agencyRepository,
                            BusRepository busRepository, TripRepository tripRepository,
                            TripScheduleRepository tripScheduleRepository) {
+
+
         return args -> {
             //Create Admin and Passenger Roles
             Role adminRole = roleRepository.findByRole("ADMIN");

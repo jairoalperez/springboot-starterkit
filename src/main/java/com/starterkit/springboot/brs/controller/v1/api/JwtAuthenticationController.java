@@ -1,8 +1,6 @@
 package com.starterkit.springboot.brs.controller.v1.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.google.gson.Gson;
-import com.starterkit.springboot.brs.config.FakeController;
 import com.starterkit.springboot.brs.controller.v1.request.ProfileRequest;
 import com.starterkit.springboot.brs.controller.v1.response.LoginResponse;
 import com.starterkit.springboot.brs.security.CustomUserDetailsService;
@@ -10,6 +8,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,17 +20,22 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import static com.starterkit.springboot.brs.security.SecurityConstants.*;
-import static com.starterkit.springboot.brs.security.SecurityConstants.TOKEN_PREFIX;
 
 @RestController
 @CrossOrigin(maxAge = 36000, origins = "*" , allowedHeaders = "*")
@@ -53,40 +57,22 @@ public class JwtAuthenticationController {
     @Autowired
     private  com.starterkit.springboot.brs.service.UserService userService;
 
+//
+//    /mybootcamps
+//    /myprogress
+//    /leaderboard
+//    /onlinePractice--> Code --> Compiled bt Judge API
+
+
+
     @PostMapping("/profile")
-    public  ResponseEntity<?> getProfile( org.springframework.security.core.Authentication authentication, java.security.Principal principal,@Valid @RequestBody ProfileRequest profileRequest){
+    @ApiOperation(value = "",  authorizations = {@Authorization(value = "apikey")})
+    public  ResponseEntity<?> getProfile(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Collection<? extends GrantedAuthority> list= authentication.getAuthorities();
+        String user=(String)authentication.getPrincipal();
         com.starterkit.springboot.brs.dto.model.user.UserDto userDto= new com.starterkit.springboot.brs.dto.model.user.UserDto();
-        String token = profileRequest.getToken();
-        if (token != null) {
-            Claims claims = Jwts.parser()
-                    .setSigningKey(SECRET)
-                    .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
-                    .getBody();
-            // Extract the UserName
-            String user = claims.getSubject();
-
-            userDto=  userService.findUserByEmail(user);
-
-        }
-
-
-
-//            // Extract the Roles
-//            ArrayList<String> roles = (ArrayList<String>) claims.get("roles");
-//            // Then convert Roles to GrantedAuthority Object for injecting
-//            ArrayList<org.springframework.security.core.GrantedAuthority> list = new ArrayList<>();
-//            if (roles != null) {
-//                for (String a : roles) {
-//                    GrantedAuthority g = new SimpleGrantedAuthority(a);
-//                    list.add(g);
-//                }
-//            }
-//            if (user != null) {
-//                return new UsernamePasswordAuthenticationToken(user, null, list);
-//            }
-//            return null;
-//        }
-
+        userDto=  userService.findUserByEmail(user);
         return  ResponseEntity.ok(userDto);
     }
 

@@ -57,9 +57,7 @@ public class MultiHttpSecurityConfig {
                     .antMatcher("/api/**")
                     .antMatcher("/apiauth/**")
                     .authorizeRequests()
-                    .antMatchers("/api/v1/user/signup").permitAll()
-                    .antMatchers("/apiauth/authenticate").permitAll()
-                    .antMatchers("/apiauth/profile").permitAll()
+                    .antMatchers("/api/authenticate").permitAll()
                     .anyRequest()
                     .authenticated()
                     .and()
@@ -67,6 +65,7 @@ public class MultiHttpSecurityConfig {
                     .authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                     .and()
                     .addFilter(new ApiJWTAuthenticationFilter(authenticationManager()))
+                    .addFilter(new ApiJWTAuthorizationFilter(authenticationManager()))
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         }
@@ -135,7 +134,7 @@ public class MultiHttpSecurityConfig {
                     "/resources/static/**", "/css/**", "/js/**", "/img/**", "/fonts/**",
                     "/images/**", "/scss/**", "/vendor/**", "/favicon.ico", "/auth/**", "/favicon.png",
                     "/v2/api-docs", "/configuration/ui", "/configuration/security",
-                    "/webjars/**", "/swagger-resources/**", "/actuator", "/swagger-ui/**",
+                    "/webjars/**", "/swagger-resources/**", "/actuator", "/swagger-ui/**","/api/v1/**",
                     "/actuator/**", "/swagger-ui/index.html", "/swagger-ui/");
         }
         // @formatter:on
