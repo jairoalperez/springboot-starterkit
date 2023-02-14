@@ -34,7 +34,7 @@ public class BusReservationSystemApplication {
 
         return args -> {
 
-            if (true){
+            if (false){
 
                 Role participantRole = roleRepository.findByRole("PARTICIPANT");
                 if (participantRole == null) {
@@ -46,7 +46,7 @@ public class BusReservationSystemApplication {
                 if (admin == null) {
 
                     Set<UserProfile> userProfiles = new HashSet<>();
-                    UserProfile userProfile = new UserProfile();
+                    UserProfile userProfile = new UserProfile("dheeraj1@gmail.com");
 
 
                     Experience experience = new Experience();
@@ -78,7 +78,7 @@ public class BusReservationSystemApplication {
 
                     Optional<UserProfile> userProfileOptional= profileRepository.findByName("dheeraj1@gmail.com"+"p1");
                     if (!userProfileOptional.isPresent()){
-                         userProfile = new UserProfile();
+                         userProfile = new UserProfile("dheeraj1@gmail.com");
                         userProfile.setStackOverflow("Stack");
                         userProfile.setExperience(experiences);
                         userProfile.setGithub("github");

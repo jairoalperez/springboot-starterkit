@@ -7,7 +7,9 @@ import com.starterkit.springboot.brs.exception.EntityType;
 import com.starterkit.springboot.brs.exception.ExceptionType;
 import com.starterkit.springboot.brs.model.user.Role;
 import com.starterkit.springboot.brs.model.user.User;
+import com.starterkit.springboot.brs.model.user.UserProfile;
 import com.starterkit.springboot.brs.model.user.UserRoles;
+import com.starterkit.springboot.brs.repository.user.ProfileRepository;
 import com.starterkit.springboot.brs.repository.user.RoleRepository;
 import com.starterkit.springboot.brs.repository.user.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import static com.starterkit.springboot.brs.exception.EntityType.USER;
 import static com.starterkit.springboot.brs.exception.ExceptionType.DUPLICATE_ENTITY;
@@ -38,6 +41,9 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private ProfileRepository profileRepository;
+
+    @Autowired
     private BusReservationService busReservationService;
 
     @Autowired
@@ -51,14 +57,23 @@ public class UserServiceImpl implements UserService {
             if (userDto.isAdmin()) {
                 userRole = roleRepository.findByRole(UserRoles.ADMIN.name());
             } else {
-                userRole = roleRepository.findByRole(UserRoles.MENTOR.name());
+                userRole = roleRepository.findByRole(UserRoles.PARTICIPANT.name());
             }
+            UserProfile userProfile= new UserProfile(userDto.getEmail());
+            Set<UserProfile> userProfileSet = new HashSet<>();
+            userProfileSet.add(userProfile);
+
+            userProfile = profileRepository.save(userProfile);
+
+
             user = new User()
                     .setEmail(userDto.getEmail())
                     .setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()))
                     .setRoles(new HashSet<>(Arrays.asList(userRole)))
                     .setFirstName(userDto.getFirstName())
                     .setLastName(userDto.getLastName())
+                    .setProfilePicture(userDto.getProfilePicture())
+                    .setUserProfiles(userProfileSet)
                     .setMobileNumber(userDto.getMobileNumber());
             return UserMapper.toUserDto(userRepository.save(user));
         }

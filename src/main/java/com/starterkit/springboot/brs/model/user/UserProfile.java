@@ -10,12 +10,12 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Embedded;
+import java.util.HashSet;
 import java.util.Set;
 
 
 @Getter
 @Setter
-@NoArgsConstructor
 @Accessors(chain = true)
 @Document(collection = "userProfile")
 public class UserProfile {
@@ -37,5 +37,17 @@ public class UserProfile {
     private Set<Skill> skills;
     @Embedded
     private  Set<Project> projects;
+
+
+    public UserProfile(String name){
+        this.skills= new HashSet<>();
+        this.education= new HashSet<>();
+        this.projects= new HashSet<>();
+        this.experience= new HashSet<>();
+        this.stackOverflow = "";
+        this.linkedIn="";
+        this.github="";
+        this.name=name;
+    }
 
 }
