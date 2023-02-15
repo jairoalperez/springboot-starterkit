@@ -20,6 +20,8 @@ public class UserMapper {
 
     public static UserDto toUserDto(User user) {
         return new UserDto()
+                .setId(user.getId())
+                .setPassword(user.getPassword())
                 .setEmail(user.getEmail())
                 .setFirstName(user.getFirstName())
                 .setLastName(user.getLastName())
@@ -42,6 +44,9 @@ public class UserMapper {
 
     public static User toUser(UserDto user) {
         return new User()
+                .setId(user.getId())
+                .setProfilePicture(user.getProfilePicture())
+                .setPassword(user.getPassword())
                 .setEmail(user.getEmail())
                 .setFirstName(user.getFirstName())
                 .setLastName(user.getLastName())

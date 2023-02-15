@@ -50,4 +50,15 @@ public class UserProfile {
         this.name=name;
     }
 
+    public UserProfile(){
+        this.skills= new HashSet<>();
+        this.education= new HashSet<>();
+        this.projects= new HashSet<>();
+        this.experience= new HashSet<>();
+        this.stackOverflow = "";
+        this.linkedIn="";
+        this.github="";
+        this.name="";
+    }
+
 }

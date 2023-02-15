@@ -1,6 +1,8 @@
 package com.starterkit.springboot.brs.service;
 
+import com.starterkit.springboot.brs.dto.mapper.RoleMapper;
 import com.starterkit.springboot.brs.dto.mapper.UserMapper;
+import com.starterkit.springboot.brs.dto.model.user.RoleDto;
 import com.starterkit.springboot.brs.dto.model.user.UserDto;
 import com.starterkit.springboot.brs.exception.BRSException;
 import com.starterkit.springboot.brs.exception.EntityType;
@@ -21,6 +23,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.starterkit.springboot.brs.exception.EntityType.USER;
 import static com.starterkit.springboot.brs.exception.ExceptionType.DUPLICATE_ENTITY;
@@ -105,11 +108,16 @@ public class UserServiceImpl implements UserService {
     public UserDto updateProfile(UserDto userDto) {
         Optional<User> user = Optional.ofNullable(userRepository.findByEmail(userDto.getEmail()));
         if (user.isPresent()) {
-            User userModel = user.get();
-            userModel.setFirstName(userDto.getFirstName())
-                    .setLastName(userDto.getLastName())
-                    .setMobileNumber(userDto.getMobileNumber());
-            return UserMapper.toUserDto(userRepository.save(userModel));
+            // source -> userDto
+            // destination ->  User
+            String role= userDto.getRoles().stream().findFirst().get().getRole();
+            RoleDto roleDto= RoleMapper.toRoleDto( roleRepository.findByRole(role));
+            Set<RoleDto> roles = new HashSet<RoleDto>();
+            roles.add(roleDto);
+            userDto.setRoles(roles);
+            User userToSave=UserMapper.toUser(userDto);
+
+            return UserMapper.toUserDto(userRepository.save(userToSave));
         }
         throw exception(USER, ENTITY_NOT_FOUND, userDto.getEmail());
     }

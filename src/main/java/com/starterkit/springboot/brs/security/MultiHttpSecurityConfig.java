@@ -51,6 +51,8 @@ public class MultiHttpSecurityConfig {
         // @formatter:off
         protected void configure(HttpSecurity http) throws Exception {
             http
+                    .cors()
+                    .and()
 
                     .csrf()
                     .disable()

@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -93,6 +94,11 @@ public class JwtAuthenticationController {
                 .setProfilePicture("https://i.pinimg.com/736x/65/49/ca/6549cacdca6c392649a70153981bd27d.jpg")
                 .setAdmin(isAdmin);
         return userService.signup(userDto);
+    }
+
+    @PutMapping(value = "updateprofile", produces = MediaType.APPLICATION_JSON_VALUE)
+    public  ResponseEntity updateProfile(@RequestBody UserDto userDto){
+        return ResponseEntity.ok( userService.updateProfile(userDto));
     }
 
     @PostMapping("/apiprofile")

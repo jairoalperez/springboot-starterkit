@@ -19,5 +19,6 @@ import lombok.experimental.Accessors;
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RoleDto {
+    private  String id;
     private String role;
 }
