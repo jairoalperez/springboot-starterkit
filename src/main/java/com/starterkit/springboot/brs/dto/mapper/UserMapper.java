@@ -26,6 +26,7 @@ public class UserMapper {
                 .setFirstName(user.getFirstName())
                 .setLastName(user.getLastName())
                 .setMobileNumber(user.getMobileNumber())
+                .setAddress(user.getAddress())
                 .setAdmin(false)
                 .setPassword(user.getPassword())
                 .setProfilePicture(user.getProfilePicture())
@@ -47,7 +48,7 @@ public class UserMapper {
                 .setId(user.getId())
                 .setProfilePicture(user.getProfilePicture())
                 .setPassword(user.getPassword())
-
+                .setAddress(user.getAddress())
                 .setEmail(user.getEmail())
                 .setFirstName(user.getFirstName())
                 .setLastName(user.getLastName())

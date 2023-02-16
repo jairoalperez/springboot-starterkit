@@ -31,6 +31,8 @@ public class UserDto {
     private String mobileNumber;
     private boolean isAdmin;
     private Set<RoleDto> roles;
+
+    private String address;
     private Set<UserProfileDto> userProfile;
     public String getFullName() {
         return firstName != null ? firstName.concat(" ").concat(lastName) : "";

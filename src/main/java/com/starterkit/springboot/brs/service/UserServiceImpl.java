@@ -77,7 +77,9 @@ public class UserServiceImpl implements UserService {
                     .setLastName(userDto.getLastName())
                     .setProfilePicture(userDto.getProfilePicture())
                     .setUserProfiles(userProfileSet)
-                    .setMobileNumber(userDto.getMobileNumber());
+                    .setMobileNumber(userDto.getMobileNumber())
+                    .setAddress(userDto.getAddress())
+            ;
             return UserMapper.toUserDto(userRepository.save(user));
         }
         throw exception(USER, DUPLICATE_ENTITY, userDto.getEmail());
