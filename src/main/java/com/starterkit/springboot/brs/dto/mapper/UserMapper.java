@@ -47,6 +47,7 @@ public class UserMapper {
                 .setId(user.getId())
                 .setProfilePicture(user.getProfilePicture())
                 .setPassword(user.getPassword())
+
                 .setEmail(user.getEmail())
                 .setFirstName(user.getFirstName())
                 .setLastName(user.getLastName())

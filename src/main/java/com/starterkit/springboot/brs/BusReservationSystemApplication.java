@@ -34,7 +34,98 @@ public class BusReservationSystemApplication {
 
         return args -> {
 
+
+
+            if(true){
+
+                Role participantRole = roleRepository.findByRole("PARTICIPANT");
+                if (participantRole == null) {
+                    participantRole = new Role();
+                    participantRole.setRole("PARTICIPANT");
+                    roleRepository.save(participantRole);
+                }
+                HashSet<Role> roles = new HashSet<>();
+                roles.add(participantRole);
+                   User user = new User();
+                   HashSet<UserProfile> userProfiles =new HashSet<>();
+
+                   UserProfile userProfile = new UserProfile();
+                   userProfile.setName("dheeraj.singh@snva.com");
+
+
+                HashSet<Experience> experiences = new HashSet<>();
+
+                experiences.add(new Experience()
+                        .setName("Software Developer Intern")
+                        .setDescription("As a a developer i used to wbdkfkasjfkasfgsdjfklg")
+                        .setYears(1.5f));
+
+                HashSet<Education> educations = new HashSet<>();
+                educations.add(
+                        new Education()
+                                .setName("HighSchool")
+                                .setCity("Some city")
+                                .setCountry("USA")
+                                .setUniversity("Some University")
+                                .setState("Some state")
+                );
+
+                HashSet<Skill> skills = new HashSet<>();
+                skills.add(
+                        new Skill()
+                                .setSkillName("Java")
+                                .setProficieny(5)
+                                .setCertificationLink("some cert links")
+
+
+                );
+                HashSet<Project> projects= new HashSet<>();
+                projects.add(
+                        new Project()
+                                .setName("The Apirio")
+                                .setRoles("I was just a beginner i used to manage the docs")
+                                .setTeamSize(5)
+                                .setDetails("some lengthy details")
+                                .setResponsibilities("Some responsibilities")
+                                .setTechStack("MERN Stack")
+
+                );
+
+                userProfile.setSkills(skills);
+                userProfile.setEducation(educations);
+                userProfile.setProjects(projects);
+                userProfile.setExperience(experiences);
+
+
+                userProfile= profileRepository.save(userProfile);
+
+                System.out.println("The Profile was created !!!!!!!!!!!!!");
+
+                   user.setFirstName("Dheeraj");
+                    user.setLastName("Singh");
+                    user.setEmail("dheeraj.singh@snva.com");
+                    user.setRoles(roles);
+                    user.setMobileNumber("+1 111 11111");
+                    user.setAddress("SOme Address USA ");
+                    user.setPassword(new BCryptPasswordEncoder().encode("123456")) ;// "123456";
+                    user.setProfilePicture("");
+                    userProfiles.add(userProfile);
+                    user.setUserProfiles(userProfiles);
+
+                System.out.println("The User was created !!!!!!!!!!!!!"+ userRepository.save(user));
+            }
+
             if (false){
+
+
+
+
+
+
+
+
+
+
 
                 Role participantRole = roleRepository.findByRole("PARTICIPANT");
                 if (participantRole == null) {

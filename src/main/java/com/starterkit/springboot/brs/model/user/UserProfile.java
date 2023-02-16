@@ -59,6 +59,7 @@ public class UserProfile {
         this.linkedIn="";
         this.github="";
         this.name="";
+
     }
 
 }

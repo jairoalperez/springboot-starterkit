@@ -13,5 +13,6 @@ import java.util.List;
 @Accessors(chain = true)
 public class Experience {
         private String name;
-        private Integer years;
+        private float years;
+        private String description;
 }

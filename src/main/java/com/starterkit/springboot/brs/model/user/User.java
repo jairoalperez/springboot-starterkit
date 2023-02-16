@@ -28,6 +28,8 @@ public class User {
 
     private String profilePicture;
 
+    private String address;
+
     @Indexed(unique = true, direction = IndexDirection.DESCENDING)
     private String email;
 
