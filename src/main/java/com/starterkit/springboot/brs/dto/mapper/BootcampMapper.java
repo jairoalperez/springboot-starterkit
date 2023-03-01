@@ -29,6 +29,19 @@ public class BootcampMapper {
                 .setUsers(bootcamp.getUsers());
     }
 
+    public static Bootcamp toBootcamp(BootcampDto bootcamp) {
+        return new Bootcamp()
+                .setId(bootcamp.getId())
+                .setDescription(bootcamp.getDescription())
+                .setEndDate(bootcamp.getEndDate())
+                .setLongHtml(bootcamp.getLongHtml())
+                .setName(bootcamp.getName())
+                .setSessions(SessionMapper.toSessionList(bootcamp.getSessions()))
+                .setStartSate(bootcamp.getStartSate())
+                .setTechnologyStack(TecnologyStackMapper.toTechnologyStackList(bootcamp.getTechnologyStack()))
+                .setUsers(bootcamp.getUsers());
+    }
+
     public static Role toRole(RoleDto role) {
         return new Role()
                 .setRole(role.getRole())
@@ -42,4 +55,5 @@ public class BootcampMapper {
         });
         return bootcampDtos;
     }
+
 }

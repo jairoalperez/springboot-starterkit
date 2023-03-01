@@ -50,17 +50,12 @@ public class MultiHttpSecurityConfig {
 
         // @formatter:off
         protected void configure(HttpSecurity http) throws Exception {
-            http
-                    .cors()
-                    .and()
 
-                    .csrf()
+            http .csrf()
                     .disable()
                     .antMatcher("/api/**")
-                    .antMatcher("/apiauth/**")
                     .authorizeRequests()
-                    .antMatchers("/apiauth/authenticate").permitAll()
-                    .antMatchers("/apiauth/signup").permitAll()
+                    .antMatchers("/api/v1/user/signup").permitAll()
                     .anyRequest()
                     .authenticated()
                     .and()
@@ -71,6 +66,27 @@ public class MultiHttpSecurityConfig {
                     .addFilter(new ApiJWTAuthorizationFilter(authenticationManager()))
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//            http
+//                    .cors()
+//                    .and()
+//
+//                    .csrf()
+//                    .disable()
+//                    .antMatcher("/api/**")
+//                    .antMatcher("/apiauth/**")
+//                    .authorizeRequests()
+//                    .antMatchers("/apiauth/authenticate").permitAll()
+//                    .antMatchers("/apiauth/signup").permitAll()
+//                    .anyRequest()
+//                    .authenticated()
+//                    .and()
+//                    .exceptionHandling()
+//                    .authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+//                    .and()
+//                    .addFilter(new ApiJWTAuthenticationFilter(authenticationManager()))
+//                    .addFilter(new ApiJWTAuthorizationFilter(authenticationManager()))
+//                    .sessionManagement()
+//                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         }
         // @formatter:on
 
@@ -107,7 +123,6 @@ public class MultiHttpSecurityConfig {
                     .antMatchers("/").permitAll()
                     .antMatchers("/login").permitAll()
                     .antMatchers("/signup").permitAll()
-                    .antMatchers("/apiauth/authenticate").permitAll()
                     .antMatchers("/dashboard/**").hasAuthority("ADMIN")
                     .anyRequest()
                     .authenticated()
@@ -137,9 +152,18 @@ public class MultiHttpSecurityConfig {
                     "/resources/static/**", "/css/**", "/js/**", "/img/**", "/fonts/**",
                     "/images/**", "/scss/**", "/vendor/**", "/favicon.ico", "/auth/**", "/favicon.png",
                     "/v2/api-docs", "/configuration/ui", "/configuration/security",
-                    "/webjars/**", "/swagger-resources/**", "/actuator", "/swagger-ui/**","/api/v1/**",
+                    "/webjars/**", "/swagger-resources/**", "/actuator", "/swagger-ui/**",
                     "/actuator/**", "/swagger-ui/index.html", "/swagger-ui/");
         }
+
+//            web.ignoring().antMatchers(
+//                    "/resources/**", "/static/**", "/css/**", "/js/**", "/images/**",
+//                    "/resources/static/**", "/css/**", "/js/**", "/img/**", "/fonts/**",
+//                    "/images/**", "/scss/**", "/vendor/**", "/favicon.ico", "/auth/**", "/favicon.png",
+//                    "/v2/api-docs", "/configuration/ui", "/configuration/security",
+//                    "/webjars/**", "/swagger-resources/**", "/actuator", "/swagger-ui/**","/api/v1/**",
+//                    "/actuator/**", "/swagger-ui/index.html", "/swagger-ui/");
+//        }
         // @formatter:on
     }
 }

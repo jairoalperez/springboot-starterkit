@@ -28,6 +28,17 @@ public class SessionItemMapper {
 
     }
 
+    public static SessionItem toSession(SessionItemDto session) {
+        return new SessionItem()
+                .setId(session.getId())
+                .setName(session.getName())
+                .setDetails(session.getDetails())
+                .setSessionLink(session.getSessionLink())
+                .setSessionContentRecorded(session.getSessionContentRecorded())
+                .setSessionType(session.getSessionType());
+
+    }
+
     public static Role toRole(RoleDto role) {
         return new Role()
                 .setRole(role.getRole())
@@ -38,6 +49,13 @@ public class SessionItemMapper {
     public static List<SessionItemDto> toSessionDtoList(List<SessionItem> sessionItems) {
         List<SessionItemDto> sessionItemDtos = new ArrayList<>();
         sessionItems.stream().forEach(x -> sessionItemDtos.add(toSessionDto(x)));
+        return sessionItemDtos;
+
+    }
+
+    public static List<SessionItem> toSessionList(List<SessionItemDto> sessionItems) {
+        List<SessionItem> sessionItemDtos = new ArrayList<>();
+        sessionItems.stream().forEach(x -> sessionItemDtos.add(toSession(x)));
         return sessionItemDtos;
 
     }

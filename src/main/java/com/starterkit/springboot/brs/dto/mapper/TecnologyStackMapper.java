@@ -43,4 +43,9 @@ public class TecnologyStackMapper {
         return technologyDtos;
     }
 
+    public static List<Technology> toTechnologyStackList(List<TechnologyDto> technologyStack) {
+        List<Technology> technologyDtos = new ArrayList<>();
+        technologyDtos.stream().forEach(x -> technologyDtos.add(x));
+        return technologyDtos;
+    }
 }
