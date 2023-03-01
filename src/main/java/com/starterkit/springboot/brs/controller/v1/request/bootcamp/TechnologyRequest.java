@@ -2,7 +2,7 @@ package com.starterkit.springboot.brs.controller.v1.request.bootcamp;
 
 
 
-public class Technology {
+public class TechnologyRequest {
     String id;
     String name;
     String vendorName;

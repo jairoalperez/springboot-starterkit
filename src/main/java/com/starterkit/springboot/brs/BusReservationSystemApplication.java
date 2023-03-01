@@ -1,7 +1,11 @@
 package com.starterkit.springboot.brs;
 
+import com.starterkit.springboot.brs.dto.mapper.BootcampMapper;
+import com.starterkit.springboot.brs.model.bootcamp.Bootcamp;
+import com.starterkit.springboot.brs.model.bootcamp.Technology;
 import com.starterkit.springboot.brs.model.bus.*;
 import com.starterkit.springboot.brs.model.user.*;
+import com.starterkit.springboot.brs.repository.bootcamp.BootcampRepository;
 import com.starterkit.springboot.brs.repository.bus.*;
 import com.starterkit.springboot.brs.repository.user.ProfileRepository;
 import com.starterkit.springboot.brs.repository.user.RoleRepository;
@@ -13,10 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @SpringBootApplication
 public class BusReservationSystemApplication {
@@ -26,7 +27,7 @@ public class BusReservationSystemApplication {
     }
 
     @Bean
-    CommandLineRunner init(ProfileRepository profileRepository, RoleRepository roleRepository, UserRepository userRepository,
+    CommandLineRunner init(ProfileRepository profileRepository, BootcampRepository bootcampRepository, RoleRepository roleRepository, UserRepository userRepository,
                            StopRepository stopRepository, AgencyRepository agencyRepository,
                            BusRepository busRepository, TripRepository tripRepository,
                            TripScheduleRepository tripScheduleRepository) {
@@ -34,6 +35,28 @@ public class BusReservationSystemApplication {
 
         return args -> {
 
+
+            if(true){
+
+                Technology technology = new Technology();
+
+
+
+                List<Bootcamp> bootcamps =  bootcampRepository.findByName("Full Stack Java");
+                if(bootcamps.size() < 1){
+                    // we need to make one as it is zero
+                    Bootcamp bootcamp = new Bootcamp();
+                    bootcamp.setDescription("seome desc")
+                            .setEndDate(new Date())
+                            .setName("Full Stack Java")
+                            .setLongHtml("some long html")
+                            .setEndDate(new Date());
+
+
+
+                }
+
+            }
 
 
             if(false){

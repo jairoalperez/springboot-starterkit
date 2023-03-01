@@ -4,10 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.IndexDirection;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
@@ -16,9 +12,9 @@ import java.util.List;
 @NoArgsConstructor
 @Accessors(chain = true)
 
-public class Session {
+public class SessionDto {
     String id;
     String name;
     Date SessionDate;
-    List<SessionItem> sessionItems;
+    List<SessionItemDto> sessionItems;
 }

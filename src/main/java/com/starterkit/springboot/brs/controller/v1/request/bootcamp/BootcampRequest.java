@@ -22,7 +22,7 @@ import java.util.List;
 @Accessors(chain = true)
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Bootcamp {
+public class BootcampRequest {
 
     String id;
     @NotEmpty(message = "{constraints.NotEmpty.message}")
@@ -41,6 +41,6 @@ public class Bootcamp {
     String longHtml;
     @Lazy
     List<User> users;
-    List<Technology> technologyStack;
-    List <Session> sessions;
+    List<TechnologyRequest> technologyStack;
+    List <SessionRequest> sessions;
 }
