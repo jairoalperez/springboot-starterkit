@@ -24,7 +24,7 @@ public class BootcampMapper {
                 .setLongHtml(bootcamp.getLongHtml())
                 .setName(bootcamp.getName())
                 .setSessions(SessionMapper.toSessionDtoList(bootcamp.getSessions()))
-                .setStartSate(bootcamp.getStartSate())
+                .setStartSate(bootcamp.getStartDate())
                 .setTechnologyStack(TecnologyStackMapper.toTechnologyStackDtoList(bootcamp.getTechnologyStack()))
                 .setUsers(bootcamp.getUsers());
     }

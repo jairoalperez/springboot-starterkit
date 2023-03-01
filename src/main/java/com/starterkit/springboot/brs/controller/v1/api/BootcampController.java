@@ -21,7 +21,7 @@ public class BootcampController {
 
     // create an endpoint at "/allbootcamps"
 
-    @PostMapping("/allbootcamps")
+    @GetMapping("/allbootcamps")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ResponseEntity getAllBootcamps() {
         return ResponseEntity.ok(bootcampService.getAllBootcamps());

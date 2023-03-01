@@ -51,7 +51,7 @@ public class BusReservationSystemApplication {
                             .setEndDate(new Date())
                             .setName("Full Stack Java")
                             .setLongHtml("some long html")
-                            .setEndDate(new Date())
+                            .setStartDate(new Date())
                             .setTechnologyStack(technologyStack)
                             .setUsers(user)
                             .setSessions(sessions);
