@@ -45,7 +45,7 @@ import static com.starterkit.springboot.brs.security.SecurityConstants.*;
 @CrossOrigin(maxAge = 36000, origins = "*" , allowedHeaders = "*")
 @RequestMapping("/api/v1/user")
 
-@Api(value = "brs-application", description = "Operations pertaining to user login and logout in the BRS application")
+@Api(value = "brs-application", description = "Operations pertaining to user login acnd logout in the BRS application")
 public class JwtAuthenticationController {
 
     @Autowired
@@ -105,14 +105,13 @@ public class JwtAuthenticationController {
         return userService.signup(userDto);
     }
 
-    @PutMapping(value = "updateprofile", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/updateprofile", produces = MediaType.APPLICATION_JSON_VALUE)
     public  ResponseEntity updateProfile(@RequestBody UserDto userDto){
         return ResponseEntity.ok( userService.updateProfile(userDto));
     }
 
     @PostMapping("/apiprofile")
-    @ResponseBody
-    @ApiOperation(value = "",  authorizations = {@Authorization(value = "apikey")})
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public  ResponseEntity<?> getProfile(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Collection<? extends GrantedAuthority> list= authentication.getAuthorities();
