@@ -17,29 +17,18 @@ import java.util.List;
 @Component
 public class TecnologyStackMapper {
 
-    public static SessionDto toSessionDto(Session session) {
-        return new SessionDto()
-                .setId(session.getId())
-                .setName(session.getName())
-                .setSessionDate(session.getSessionDate())
-                .setSessionItems(SessionItemMapper.toSessionDtoList(session.getSessionItems()));
-    }
+    public static TechnologyDto toTechnologyDto(Technology technology) {
+        return new TechnologyDto()
+                .setId(technology.getId())
+                .setName(technology.getName())
+                .setVendorName(technology.getVendorName())
+                .setVersion(technology.getVersion());
 
-    public static Role toRole(RoleDto role) {
-        return new Role()
-                .setRole(role.getRole())
-                .setId(role.getId());
-    }
-
-    public static List<SessionDto> toSessionDtoList(List<Session> sessions) {
-        List<SessionDto> sessionDtos = new ArrayList<>();
-        sessions.stream().forEach(x -> sessionDtos.add(toSessionDto(x)));
-        return sessionDtos;
     }
 
     public static List<TechnologyDto> toTechnologyStackDtoList(List<Technology> technologyStack) {
         List<TechnologyDto> technologyDtos = new ArrayList<>();
-        technologyDtos.stream().forEach(x -> technologyDtos.add(x));
+            technologyStack.stream().forEach(x -> technologyDtos.add(toTechnologyDto(x)));
         return technologyDtos;
     }
 

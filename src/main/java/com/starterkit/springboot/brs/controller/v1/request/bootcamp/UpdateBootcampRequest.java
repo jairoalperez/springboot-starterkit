@@ -3,6 +3,7 @@ package com.starterkit.springboot.brs.controller.v1.request.bootcamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.starterkit.springboot.brs.model.bootcamp.Session;
 import com.starterkit.springboot.brs.model.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ import java.util.List;
 @Accessors(chain = true)
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BootcampRequest {
+public class UpdateBootcampRequest {
 
     String id;
     @NotEmpty(message = "{constraints.NotEmpty.message}")
@@ -40,7 +41,7 @@ public class BootcampRequest {
     @NotNull(message = "{constraints.NotEmpty.message}")
     String longHtml;
     @Lazy
-    List<User> users;
-    List<TechnologyRequest> technologyStack;
-    List <SessionRequest> sessions;
+    List<String> userIds; // ["fsdfsdfdsfsd",."fsdfsdfsdfsd"]
+    List<String> technologyStackIds;
+    List <String> sessionIds;
 }
