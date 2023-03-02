@@ -13,7 +13,7 @@ public interface IBootcampService {
     List<BootcampDto> getByName(String name);
     List<BootcampDto> getAllBootcampsByUser(String email);
     boolean createBootcamp(BootcampDto bootcamp);
-    boolean updateBootcamp(BootcampDto bootcamp);
+    boolean updateBootcamp(BootcampDto bootcampDto);
     boolean deleteBootcamp(String id);
 
     List<BootcampDto> registerUserBootcamp(BootcampDto email);

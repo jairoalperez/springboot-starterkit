@@ -5,6 +5,7 @@ package com.starterkit.springboot.brs.exception;
  */
 public enum EntityType {
     USER,
+    BOOTCAMP,
     ROLE,
     AGENCY,
     BUS,

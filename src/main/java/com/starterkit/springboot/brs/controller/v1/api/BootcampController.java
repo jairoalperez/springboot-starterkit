@@ -1,5 +1,6 @@
 package com.starterkit.springboot.brs.controller.v1.api;
 
+import com.starterkit.springboot.brs.dto.model.bootcamp.BootcampDto;
 import com.starterkit.springboot.brs.service.IBootcampService;
 import com.starterkit.springboot.brs.service.ISessionService;
 import com.starterkit.springboot.brs.service.ITechnologyService;
@@ -7,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,6 +54,11 @@ public class BootcampController {
     // Jack to create bootcamp
 
     // Thomas to edit the bootcamp
+    @PutMapping(value = "updatebootcamp", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public  ResponseEntity updateProfile(@RequestBody BootcampDto bootcampDto){
+        return ResponseEntity.ok( bootcampService.updateBootcamp(bootcampDto));
+    }
 
     // derrick who will show all the bootcamp on react
 
