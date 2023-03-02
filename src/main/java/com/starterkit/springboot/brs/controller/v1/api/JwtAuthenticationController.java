@@ -79,6 +79,13 @@ public class JwtAuthenticationController {
         return Response.ok().setPayload(registerUser(userSignupRequest, false));
     }
 
+
+    @GetMapping("/allUsers")
+    public  ResponseEntity allUsers(){
+         return ResponseEntity.ok().body( userService.allUsersSecure());
+    }
+
+
     /**
      * Register a new user in the database
      *

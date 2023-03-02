@@ -19,10 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.starterkit.springboot.brs.exception.EntityType.USER;
@@ -140,6 +137,16 @@ public class UserServiceImpl implements UserService {
             return UserMapper.toUserDto(userRepository.save(userModel));
         }
         throw exception(USER, ENTITY_NOT_FOUND, userDto.getEmail());
+    }
+
+    @Override
+    public List<UserDto> allUsers() {
+        return UserMapper.toUserDtoList( userRepository.findAll());
+    }
+
+    @Override
+    public List<UserDto> allUsersSecure() {
+        return UserMapper.toUserDtoListSecure( userRepository.findAll());
     }
 
     /**

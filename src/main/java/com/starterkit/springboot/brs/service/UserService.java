@@ -2,6 +2,8 @@ package com.starterkit.springboot.brs.service;
 
 import com.starterkit.springboot.brs.dto.model.user.UserDto;
 
+import java.util.List;
+
 /**
  * Created by Arpit Khandelwal.
  */
@@ -37,4 +39,8 @@ public interface UserService {
      * @return
      */
     UserDto changePassword(UserDto userDto, String newPassword);
+
+    List<UserDto> allUsers();
+
+    List<UserDto> allUsersSecure();
 }

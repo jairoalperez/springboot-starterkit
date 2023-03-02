@@ -31,4 +31,7 @@ public class TechnologyStackMapper {
         return technologyDtos;
     }
 
+    public static List<Technology> toTechnologyStackList(List<TechnologyDto> technologyStack) {
+        return null;
+    }
 }

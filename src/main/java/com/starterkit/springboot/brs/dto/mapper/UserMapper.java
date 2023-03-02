@@ -9,7 +9,9 @@ import com.starterkit.springboot.brs.model.user.UserProfile;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -66,4 +68,19 @@ public class UserMapper {
                         .collect(Collectors.toSet())));
     }
 
+    public static List<UserDto> toUserDtoList(List<User> all) {
+        List<UserDto> userDtors = new ArrayList<>();
+        all.stream().forEach(x-> userDtors.add( toUserDto(x)));
+        return  userDtors;
+    }
+
+    public static List<UserDto> toUserDtoListSecure(List<User> all) {
+        List<UserDto> userDtors = new ArrayList<>();
+            all.stream().forEach(x->{
+                UserDto userDto = toUserDto(x);
+                userDto.setPassword("**************Secured*************");
+                userDtors.add(userDto);
+            });
+        return  userDtors;
+    }
 }

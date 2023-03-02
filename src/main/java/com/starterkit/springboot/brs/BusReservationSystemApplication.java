@@ -5,6 +5,7 @@ import com.starterkit.springboot.brs.model.bootcamp.*;
 import com.starterkit.springboot.brs.model.bus.*;
 import com.starterkit.springboot.brs.model.user.*;
 import com.starterkit.springboot.brs.repository.bootcamp.BootcampRepository;
+import com.starterkit.springboot.brs.repository.bootcamp.SessionItemRepository;
 import com.starterkit.springboot.brs.repository.bootcamp.SessionRepository;
 import com.starterkit.springboot.brs.repository.bootcamp.TechnologyRepository;
 import com.starterkit.springboot.brs.repository.bus.*;
@@ -32,25 +33,33 @@ public class BusReservationSystemApplication {
                            SessionRepository sessionRepository, TechnologyRepository technologyRepository,
                            RoleRepository roleRepository, UserRepository userRepository,
                            StopRepository stopRepository, AgencyRepository agencyRepository,
-                           BusRepository busRepository, TripRepository tripRepository,
+                           BusRepository busRepository, TripRepository tripRepository, SessionItemRepository sessionItemRepository,
                            TripScheduleRepository tripScheduleRepository) {
 
 
         return args -> {
 
 
-            if (false) {
+            if (true) {
 
                 List<User> user = new ArrayList<>();
-                List<Technology> technologyList = technologyRepository.findByName("SpringBoots");
-
+                List<Technology> technologyList = technologyRepository.findByName("React Js");
+                Technology springboot = new Technology();
+                Technology reactjs = new Technology();
                 if (technologyList.size() < 1) {
-                    Technology springboot = new Technology();
-                    springboot.setName("SpringBoots");
-                    springboot.setVersion("1.0");
-                    springboot.setVendorName("Some vendor");
-                    technologyRepository.save(springboot);
+                    springboot.setName("React Js");
+                    springboot.setVersion("18x");
+                    springboot.setVendorName("Meta");
+                    springboot = technologyRepository.save(springboot);
                     System.out.println("Technology Create Successfully !!!!");
+
+                    reactjs = new Technology();
+                    reactjs.setName("Spring Framework");
+                    reactjs.setVersion("3x");
+                    reactjs.setVendorName("Spring People");
+                    reactjs = technologyRepository.save(reactjs);
+                    technologyList.add(springboot);
+                    technologyList.add(reactjs);
                 }
 
                 List<SessionItem> sessionItems = new ArrayList<>();
@@ -60,13 +69,17 @@ public class BusReservationSystemApplication {
                 sessionItem1.setDetails("This is the item 1");
                 sessionItem1.setSessionLink("www.xxx1.com");
                 sessionItem1.setSessionType(SessionType.PDF);
+                sessionItem1.setSessionContentRecorded("Webex Recording Link");
+                sessionItem1= sessionItemRepository.save(sessionItem1);
+
 
                 SessionItem sessionItem2 = new SessionItem();
                 sessionItem2.setName("Item2");
                 sessionItem2.setDetails("This is the item 2");
                 sessionItem2.setSessionLink("www.xxx2.com");
                 sessionItem2.setSessionType(SessionType.CODE);
-
+                sessionItem2.setSessionContentRecorded("Webex Recording Link2");
+                sessionItem2= sessionItemRepository.save(sessionItem2);
                 sessionItems.add(sessionItem1);
                 sessionItems.add(sessionItem2);
 
@@ -76,7 +89,8 @@ public class BusReservationSystemApplication {
                     session1.setName("Item1");
                     session1.setSessionDate(new Date());
                     session1.setSessionItems(sessionItems);
-                    sessionRepository.save(session1);
+                    session1=sessionRepository.save(session1);
+                    sessionList.add(session1);
                     System.out.println("Session Create Successfully !!!!");
                 }
 

@@ -27,15 +27,13 @@ public class BootcampController {
 
     @Autowired
     ISessionService sessionService;
-    // Task 1 . create modal based on bootcamp that will store the whole information for the bootcamp
-
-    // create an endpoint at "/allbootcamps"
 
     @GetMapping("/allbootcamps")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ResponseEntity getAllBootcamps() {
         return ResponseEntity.ok(bootcampService.getAllBootcamps());
     }
+
 
     @GetMapping("/allteches")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
@@ -49,23 +47,9 @@ public class BootcampController {
         return ResponseEntity.ok(sessionService.getAllSessions());
     }
 
-    // Viet to implement list bootcamp
-
-    // Jack to create bootcamp
-
-    // Thomas to edit the bootcamp
     @PutMapping(value = "updatebootcamp", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public  ResponseEntity updateProfile(@RequestBody BootcampDto bootcampDto){
         return ResponseEntity.ok( bootcampService.updateBootcamp(bootcampDto));
     }
-
-    // derrick who will show all the bootcamp on react
-
-    // kyle to register for a bootcamp
-
-    // sabastian implement a resume uploader backend and front end
-
-
-
 }
