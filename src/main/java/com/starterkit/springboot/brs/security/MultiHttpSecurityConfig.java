@@ -51,8 +51,10 @@ public class MultiHttpSecurityConfig {
         // @formatter:off
         protected void configure(HttpSecurity http) throws Exception {
 
-           http .csrf()
-                    .disable()
+           http .cors()
+                    .and()
+                   .csrf()
+                   .disable()
                     .antMatcher("/api/**")
                     .authorizeRequests()
                     .antMatchers("/api/v1/user/signup").permitAll()
