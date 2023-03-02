@@ -1,7 +1,6 @@
 package com.starterkit.springboot.brs.dto.mapper;
 
 import com.starterkit.springboot.brs.dto.model.bootcamp.BootcampDto;
-import com.starterkit.springboot.brs.dto.model.bootcamp.SessionItemDto;
 import com.starterkit.springboot.brs.dto.model.user.RoleDto;
 import com.starterkit.springboot.brs.model.bootcamp.Bootcamp;
 import com.starterkit.springboot.brs.model.user.Role;
@@ -25,7 +24,7 @@ public class BootcampMapper {
                 .setName(bootcamp.getName())
                 .setSessions(SessionMapper.toSessionDtoList(bootcamp.getSessions()))
                 .setStartSate(bootcamp.getStartDate())
-                .setTechnologyStack(TecnologyStackMapper.toTechnologyStackDtoList(bootcamp.getTechnologyStack()))
+                .setTechnologyStack(TechnologyStackMapper.toTechnologyStackDtoList(bootcamp.getTechnologyStack()))
                 .setUsers(bootcamp.getUsers());
     }
 
