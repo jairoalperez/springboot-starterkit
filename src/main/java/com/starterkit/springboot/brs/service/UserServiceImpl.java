@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService {
         Role userRole;
         User user = userRepository.findByEmail(userDto.getEmail());
         if (user == null) {
+
             if (userDto.isAdmin()) {
                 userRole = roleRepository.findByRole(UserRoles.ADMIN.name());
             } else {
@@ -60,12 +61,15 @@ public class UserServiceImpl implements UserService {
             }
             UserProfile userProfile= new UserProfile(userDto.getEmail());
             Set<UserProfile> userProfileSet = new HashSet<>();
+
+
             userProfileSet.add(userProfile);
 
             userProfile = profileRepository.save(userProfile);
 
 
             user = new User()
+                    .setAddress("")
                     .setEmail(userDto.getEmail())
                     .setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()))
                     .setRoles(new HashSet<>(Arrays.asList(userRole)))

@@ -57,8 +57,9 @@ public class MultiHttpSecurityConfig {
                    .disable()
                     .antMatcher("/api/**")
                     .authorizeRequests()
-                    .antMatchers("/api/v1/user/signup").permitAll()
-                   .antMatchers("/api/v1/user/authenticate").permitAll()
+                    .antMatchers("/api/v1/user/authenticate").permitAll()
+                   .antMatchers("/api/v1/user/signup").permitAll()
+                   .antMatchers("/api/v1/bootcamp/allbootcamps").permitAll()
                     .anyRequest()
                     .authenticated()
                     .and()
@@ -126,6 +127,7 @@ public class MultiHttpSecurityConfig {
                     .antMatchers("/").permitAll()
                     .antMatchers("/login").permitAll()
                     .antMatchers("/signup").permitAll()
+
                     .antMatchers("/dashboard/**").hasAuthority("ADMIN")
                     .anyRequest()
                     .authenticated()
@@ -155,7 +157,7 @@ public class MultiHttpSecurityConfig {
                     "/resources/static/**", "/css/**", "/js/**", "/img/**", "/fonts/**",
                     "/images/**", "/scss/**", "/vendor/**", "/favicon.ico", "/auth/**", "/favicon.png",
                     "/v2/api-docs", "/configuration/ui", "/configuration/security",
-                    "/webjars/**", "/swagger-resources/**", "/actuator", "/swagger-ui/**",
+                    "/webjars/**", "/swagger-resources/**", "/actuator", "/swagger-ui/**","/api/v1/user/signup",
                     "/actuator/**", "/swagger-ui/index.html", "/swagger-ui/");
         }
 
@@ -164,7 +166,7 @@ public class MultiHttpSecurityConfig {
 //                    "/resources/static/**", "/css/**", "/js/**", "/img/**", "/fonts/**",
 //                    "/images/**", "/scss/**", "/vendor/**", "/favicon.ico", "/auth/**", "/favicon.png",
 //                    "/v2/api-docs", "/configuration/ui", "/configuration/security",
-//                    "/webjars/**", "/swagger-resources/**", "/actuator", "/swagger-ui/**","/api/v1/**",
+//                    "/webjars/**", "/swagger-resources/**", "/actuator", "/swagger-ui/**",,
 //                    "/actuator/**", "/swagger-ui/index.html", "/swagger-ui/");
 //        }
         // @formatter:on
