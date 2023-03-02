@@ -25,7 +25,7 @@ public class Bootcamp {
     String id;
     @Indexed(unique = true, direction = IndexDirection.DESCENDING)
     String name;
-    Date startSate;
+    Date startDate;
     Date endDate;
     String description;
     String longHtml;

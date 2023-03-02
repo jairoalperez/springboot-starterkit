@@ -2,6 +2,7 @@ package com.starterkit.springboot.brs;
 
 import com.starterkit.springboot.brs.dto.mapper.BootcampMapper;
 import com.starterkit.springboot.brs.model.bootcamp.Bootcamp;
+import com.starterkit.springboot.brs.model.bootcamp.Session;
 import com.starterkit.springboot.brs.model.bootcamp.Technology;
 import com.starterkit.springboot.brs.model.bus.*;
 import com.starterkit.springboot.brs.model.user.*;
@@ -38,22 +39,24 @@ public class BusReservationSystemApplication {
 
             if(true){
 
-                Technology technology = new Technology();
-
-
+                List<Technology> technologyStack = new ArrayList<>();
+                List<User> user = new ArrayList<>();
+                List<Session> sessions = new ArrayList<Session>();
 
                 List<Bootcamp> bootcamps =  bootcampRepository.findByName("Full Stack Java");
-                if(bootcamps.size() < 1){
+                if(bootcamps.size() < 1) {
                     // we need to make one as it is zero
                     Bootcamp bootcamp = new Bootcamp();
                     bootcamp.setDescription("seome desc")
                             .setEndDate(new Date())
                             .setName("Full Stack Java")
                             .setLongHtml("some long html")
-                            .setEndDate(new Date());
-
-
-
+                            .setStartDate(new Date())
+                            .setTechnologyStack(technologyStack)
+                            .setUsers(user)
+                            .setSessions(sessions);
+                    bootcampRepository.save(bootcamp);
+                    System.out.println("Bootcamp Create Successfully !!!!");
                 }
 
             }

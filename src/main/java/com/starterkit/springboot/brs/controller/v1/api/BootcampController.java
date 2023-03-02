@@ -2,12 +2,19 @@ package com.starterkit.springboot.brs.controller.v1.api;
 
 import com.starterkit.springboot.brs.dto.model.bootcamp.BootcampDto;
 import com.starterkit.springboot.brs.service.IBootcampService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/bootcamp")
+
+@RestController
+@RequestMapping("/api/v1/bootcamp")
+@CrossOrigin(maxAge = 36000, origins = "*" , allowedHeaders = "*")
+@Api(value = "brs-application", description = "Operations pertaining to agency management and ticket issue in the BRS application")
 public class BootcampController {
 
     @Autowired
@@ -17,6 +24,7 @@ public class BootcampController {
     // create an endpoint at "/allbootcamps"
 
     @GetMapping("/allbootcamps")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ResponseEntity getAllBootcamps() {
         return ResponseEntity.ok(bootcampService.getAllBootcamps());
     }

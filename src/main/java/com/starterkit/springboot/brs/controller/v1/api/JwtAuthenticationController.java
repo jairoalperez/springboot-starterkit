@@ -43,7 +43,8 @@ import static com.starterkit.springboot.brs.security.SecurityConstants.*;
 
 @RestController
 @CrossOrigin(maxAge = 36000, origins = "*" , allowedHeaders = "*")
-@RequestMapping("/apiauth")
+@RequestMapping("/api/v1/user")
+
 @Api(value = "brs-application", description = "Operations pertaining to user login and logout in the BRS application")
 public class JwtAuthenticationController {
 
