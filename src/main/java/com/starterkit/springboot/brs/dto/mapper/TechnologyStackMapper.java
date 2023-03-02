@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Arpit Khandelwal.
  */
 @Component
-public class TecnologyStackMapper {
+public class TechnologyStackMapper {
 
     public static TechnologyDto toTechnologyDto(Technology technology) {
         return new TechnologyDto()
@@ -23,12 +23,11 @@ public class TecnologyStackMapper {
                 .setName(technology.getName())
                 .setVendorName(technology.getVendorName())
                 .setVersion(technology.getVersion());
-
     }
 
     public static List<TechnologyDto> toTechnologyStackDtoList(List<Technology> technologyStack) {
         List<TechnologyDto> technologyDtos = new ArrayList<>();
-            technologyStack.stream().forEach(x -> technologyDtos.add(toTechnologyDto(x)));
+        technologyStack.stream().forEach(x -> technologyDtos.add(toTechnologyDto(x)));
         return technologyDtos;
     }
 

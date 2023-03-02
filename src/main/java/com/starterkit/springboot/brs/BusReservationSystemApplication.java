@@ -1,12 +1,12 @@
 package com.starterkit.springboot.brs;
 
 import com.starterkit.springboot.brs.dto.mapper.BootcampMapper;
-import com.starterkit.springboot.brs.model.bootcamp.Bootcamp;
-import com.starterkit.springboot.brs.model.bootcamp.Session;
-import com.starterkit.springboot.brs.model.bootcamp.Technology;
+import com.starterkit.springboot.brs.model.bootcamp.*;
 import com.starterkit.springboot.brs.model.bus.*;
 import com.starterkit.springboot.brs.model.user.*;
 import com.starterkit.springboot.brs.repository.bootcamp.BootcampRepository;
+import com.starterkit.springboot.brs.repository.bootcamp.SessionRepository;
+import com.starterkit.springboot.brs.repository.bootcamp.TechnologyRepository;
 import com.starterkit.springboot.brs.repository.bus.*;
 import com.starterkit.springboot.brs.repository.user.ProfileRepository;
 import com.starterkit.springboot.brs.repository.user.RoleRepository;
@@ -28,7 +28,9 @@ public class BusReservationSystemApplication {
     }
 
     @Bean
-    CommandLineRunner init(ProfileRepository profileRepository, BootcampRepository bootcampRepository, RoleRepository roleRepository, UserRepository userRepository,
+    CommandLineRunner init(ProfileRepository profileRepository, BootcampRepository bootcampRepository,
+                           SessionRepository sessionRepository, TechnologyRepository technologyRepository,
+                           RoleRepository roleRepository, UserRepository userRepository,
                            StopRepository stopRepository, AgencyRepository agencyRepository,
                            BusRepository busRepository, TripRepository tripRepository,
                            TripScheduleRepository tripScheduleRepository) {
@@ -37,31 +39,63 @@ public class BusReservationSystemApplication {
         return args -> {
 
 
-            if(true){
+            if (false) {
 
-                List<Technology> technologyStack = new ArrayList<>();
                 List<User> user = new ArrayList<>();
-                List<Session> sessions = new ArrayList<Session>();
+                List<Technology> technologyList = technologyRepository.findByName("SpringBoots");
 
-                List<Bootcamp> bootcamps =  bootcampRepository.findByName("Full Stack Java");
-                if(bootcamps.size() < 1) {
+                if (technologyList.size() < 1) {
+                    Technology springboot = new Technology();
+                    springboot.setName("SpringBoots");
+                    springboot.setVersion("1.0");
+                    springboot.setVendorName("Some vendor");
+                    technologyRepository.save(springboot);
+                    System.out.println("Technology Create Successfully !!!!");
+                }
+
+                List<SessionItem> sessionItems = new ArrayList<>();
+
+                SessionItem sessionItem1 = new SessionItem();
+                sessionItem1.setName("Item1");
+                sessionItem1.setDetails("This is the item 1");
+                sessionItem1.setSessionLink("www.xxx1.com");
+                sessionItem1.setSessionType(SessionType.PDF);
+
+                SessionItem sessionItem2 = new SessionItem();
+                sessionItem2.setName("Item2");
+                sessionItem2.setDetails("This is the item 2");
+                sessionItem2.setSessionLink("www.xxx2.com");
+                sessionItem2.setSessionType(SessionType.CODE);
+
+                sessionItems.add(sessionItem1);
+                sessionItems.add(sessionItem2);
+
+                List<Session> sessionList = sessionRepository.findByName("Item1");
+                if (sessionList.size() < 1) {
+                    Session session1 = new Session();
+                    session1.setName("Item1");
+                    session1.setSessionDate(new Date());
+                    session1.setSessionItems(sessionItems);
+                    sessionRepository.save(session1);
+                    System.out.println("Session Create Successfully !!!!");
+                }
+
+                List<Bootcamp> bootcamps = bootcampRepository.findByName("Full Stack Java");
+                if (bootcamps.size() < 1) {
                     // we need to make one as it is zero
                     Bootcamp bootcamp = new Bootcamp();
-                    bootcamp.setDescription("seome desc")
+                    bootcamp.setDescription("some desc")
                             .setEndDate(new Date())
                             .setName("Full Stack Java")
                             .setLongHtml("some long html")
                             .setStartDate(new Date())
-                            .setTechnologyStack(technologyStack)
+                            .setTechnologyStack(technologyList)
                             .setUsers(user)
-                            .setSessions(sessions);
+                            .setSessions(sessionList);
                     bootcampRepository.save(bootcamp);
                     System.out.println("Bootcamp Create Successfully !!!!");
                 }
-
-
             }
-
 
             if(false){
 

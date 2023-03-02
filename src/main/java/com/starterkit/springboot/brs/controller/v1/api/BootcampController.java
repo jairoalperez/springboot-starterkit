@@ -1,6 +1,8 @@
 package com.starterkit.springboot.brs.controller.v1.api;
 
 import com.starterkit.springboot.brs.service.IBootcampService;
+import com.starterkit.springboot.brs.service.ISessionService;
+import com.starterkit.springboot.brs.service.ITechnologyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
@@ -17,6 +19,12 @@ public class BootcampController {
 
     @Autowired
     IBootcampService bootcampService ;
+
+    @Autowired
+    ITechnologyService technologyService;
+
+    @Autowired
+    ISessionService sessionService;
     // Task 1 . create modal based on bootcamp that will store the whole information for the bootcamp
 
     // create an endpoint at "/allbootcamps"
@@ -27,7 +35,17 @@ public class BootcampController {
         return ResponseEntity.ok(bootcampService.getAllBootcamps());
     }
 
+    @GetMapping("/allteches")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ResponseEntity getAllTechnologies() {
+        return ResponseEntity.ok(technologyService.getAllTech());
+    }
 
+    @GetMapping("/allsessions")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ResponseEntity getAllSessions() {
+        return ResponseEntity.ok(sessionService.getAllSessions());
+    }
 
     // Viet to implement list bootcamp
 
