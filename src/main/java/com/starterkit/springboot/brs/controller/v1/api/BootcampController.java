@@ -37,6 +37,7 @@ public class BootcampController {
 
     // Thomas to edit the bootcamp
     @PutMapping(value = "updatebootcamp", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public  ResponseEntity updateProfile(@RequestBody BootcampDto bootcampDto){
         return ResponseEntity.ok( bootcampService.updateBootcamp(bootcampDto));
     }

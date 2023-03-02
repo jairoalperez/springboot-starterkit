@@ -61,9 +61,10 @@ public class BootcampService implements  IBootcampService {
         if (bootcamp.isPresent()) {
             List<Bootcamp> bootcamps = bootcamp.get();
             for (Bootcamp b: bootcamps){
-                if (b.getId() == bootcampDto.getId()) {
+                if (b.getId().equals(bootcampDto.getId())) {
                     Bootcamp bootcampToSave= BootcampMapper.toBootcamp(bootcampDto);
                     BootcampMapper.toBootcampDto(bootcampRepository.save(bootcampToSave));
+                    return true;
                 }
             }
             // source -> userDto
@@ -73,8 +74,6 @@ public class BootcampService implements  IBootcampService {
             // Set<RoleDto> roles = new HashSet<RoleDto>();
             // roles.add(roleDto);
             // userDto.setRoles(roles);
-
-            return true;
         }
         return false;
     }
