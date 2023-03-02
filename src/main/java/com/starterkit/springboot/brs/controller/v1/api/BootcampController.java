@@ -1,6 +1,8 @@
 package com.starterkit.springboot.brs.controller.v1.api;
 
+import com.starterkit.springboot.brs.controller.v1.request.bootcamp.UpdateBootcampRequest;
 import com.starterkit.springboot.brs.dto.model.bootcamp.BootcampDto;
+import com.starterkit.springboot.brs.exception.LearnerDromeException;
 import com.starterkit.springboot.brs.service.IBootcampService;
 import com.starterkit.springboot.brs.service.ISessionService;
 import com.starterkit.springboot.brs.service.ITechnologyService;
@@ -51,5 +53,11 @@ public class BootcampController {
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public  ResponseEntity updateProfile(@RequestBody BootcampDto bootcampDto){
         return ResponseEntity.ok( bootcampService.updateBootcamp(bootcampDto));
+    }
+
+    @PutMapping(value = "adduserbootcamp", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public  ResponseEntity addUserToBootcamp(@RequestBody UpdateBootcampRequest bootcampRequest) throws LearnerDromeException {
+        return ResponseEntity.ok( bootcampService.updateUsersBootcamp(bootcampRequest));
     }
 }

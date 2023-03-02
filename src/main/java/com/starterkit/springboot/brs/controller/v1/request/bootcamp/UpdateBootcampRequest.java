@@ -40,7 +40,6 @@ public class UpdateBootcampRequest {
     String description;
     @NotNull(message = "{constraints.NotEmpty.message}")
     String longHtml;
-    @Lazy
     List<String> userIds; // ["fsdfsdfdsfsd",."fsdfsdfsdfsd"]
     List<String> technologyStackIds;
     List <String> sessionIds;

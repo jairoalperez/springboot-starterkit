@@ -13,13 +13,13 @@ import java.util.Optional;
  * Created by Arpit Khandelwal.
  */
 @Component
-public class BRSException {
+public class LearnerDromeException extends Throwable {
 
     private static PropertiesConfig propertiesConfig;
 
     @Autowired
-    public BRSException(PropertiesConfig propertiesConfig) {
-        BRSException.propertiesConfig = propertiesConfig;
+    public LearnerDromeException(PropertiesConfig propertiesConfig) {
+        LearnerDromeException.propertiesConfig = propertiesConfig;
     }
 
     /**

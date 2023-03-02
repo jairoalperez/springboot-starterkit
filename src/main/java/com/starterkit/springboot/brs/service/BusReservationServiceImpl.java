@@ -5,7 +5,7 @@ import com.starterkit.springboot.brs.dto.mapper.TripMapper;
 import com.starterkit.springboot.brs.dto.mapper.TripScheduleMapper;
 import com.starterkit.springboot.brs.dto.model.bus.*;
 import com.starterkit.springboot.brs.dto.model.user.UserDto;
-import com.starterkit.springboot.brs.exception.BRSException;
+import com.starterkit.springboot.brs.exception.LearnerDromeException;
 import com.starterkit.springboot.brs.exception.EntityType;
 import com.starterkit.springboot.brs.exception.ExceptionType;
 import com.starterkit.springboot.brs.model.bus.*;
@@ -427,7 +427,7 @@ public class BusReservationServiceImpl implements BusReservationService {
      * @return
      */
     private RuntimeException exception(EntityType entityType, ExceptionType exceptionType, String... args) {
-        return BRSException.throwException(entityType, exceptionType, args);
+        return LearnerDromeException.throwException(entityType, exceptionType, args);
     }
 
     /**
@@ -439,6 +439,6 @@ public class BusReservationServiceImpl implements BusReservationService {
      * @return
      */
     private RuntimeException exceptionWithId(EntityType entityType, ExceptionType exceptionType, String id, String... args) {
-        return BRSException.throwExceptionWithId(entityType, exceptionType, id, args);
+        return LearnerDromeException.throwExceptionWithId(entityType, exceptionType, id, args);
     }
 }

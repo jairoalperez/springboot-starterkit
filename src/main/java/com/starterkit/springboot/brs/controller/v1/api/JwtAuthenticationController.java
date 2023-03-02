@@ -81,6 +81,7 @@ public class JwtAuthenticationController {
 
 
     @GetMapping("/allUsers")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public  ResponseEntity allUsers(){
          return ResponseEntity.ok().body( userService.allUsersSecure());
     }

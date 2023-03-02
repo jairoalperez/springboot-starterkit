@@ -40,7 +40,7 @@ public class BusReservationSystemApplication {
         return args -> {
 
 
-            if (true) {
+            if (false) {
 
                 List<User> user = new ArrayList<>();
                 List<Technology> technologyList = technologyRepository.findByName("React Js");

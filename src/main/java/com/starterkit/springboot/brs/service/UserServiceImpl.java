@@ -4,7 +4,7 @@ import com.starterkit.springboot.brs.dto.mapper.RoleMapper;
 import com.starterkit.springboot.brs.dto.mapper.UserMapper;
 import com.starterkit.springboot.brs.dto.model.user.RoleDto;
 import com.starterkit.springboot.brs.dto.model.user.UserDto;
-import com.starterkit.springboot.brs.exception.BRSException;
+import com.starterkit.springboot.brs.exception.LearnerDromeException;
 import com.starterkit.springboot.brs.exception.EntityType;
 import com.starterkit.springboot.brs.exception.ExceptionType;
 import com.starterkit.springboot.brs.model.user.Role;
@@ -20,7 +20,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static com.starterkit.springboot.brs.exception.EntityType.USER;
 import static com.starterkit.springboot.brs.exception.ExceptionType.DUPLICATE_ENTITY;
@@ -158,6 +157,6 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     private RuntimeException exception(EntityType entityType, ExceptionType exceptionType, String... args) {
-        return BRSException.throwException(entityType, exceptionType, args);
+        return LearnerDromeException.throwException(entityType, exceptionType, args);
     }
 }
