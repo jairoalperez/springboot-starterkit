@@ -49,7 +49,7 @@ public class BootcampController {
         return ResponseEntity.ok(sessionService.getAllSessions());
     }
 
-    @PutMapping(value = "updatebootcamp", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/updatebootcamp", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public  ResponseEntity updateProfile(@RequestBody BootcampDto bootcampDto){
         return ResponseEntity.ok( bootcampService.updateBootcamp(bootcampDto));

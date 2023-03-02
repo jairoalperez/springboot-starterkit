@@ -3,6 +3,7 @@ package com.starterkit.springboot.brs.dto.mapper;
 import com.starterkit.springboot.brs.dto.model.bootcamp.BootcampDto;
 import com.starterkit.springboot.brs.dto.model.user.RoleDto;
 import com.starterkit.springboot.brs.model.bootcamp.Bootcamp;
+import com.starterkit.springboot.brs.model.bootcamp.Technology;
 import com.starterkit.springboot.brs.model.user.Role;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +30,7 @@ public class BootcampMapper {
     }
 
     public static Bootcamp toBootcamp(BootcampDto bootcamp) {
+       // List<Technology> getTechno = bootcamp.getTechnologyStack();
         return new Bootcamp()
                 .setId(bootcamp.getId())
                 .setDescription(bootcamp.getDescription())

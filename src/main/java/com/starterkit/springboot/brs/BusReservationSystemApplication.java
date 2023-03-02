@@ -192,16 +192,6 @@ public class BusReservationSystemApplication {
 
             if (false){
 
-
-
-
-
-
-
-
-
-
-
                 Role participantRole = roleRepository.findByRole("PARTICIPANT");
                 if (participantRole == null) {
                     participantRole = new Role();
