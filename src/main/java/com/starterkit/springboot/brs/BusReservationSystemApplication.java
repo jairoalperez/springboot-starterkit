@@ -41,6 +41,7 @@ public class BusReservationSystemApplication {
 
 
             if (false) {
+                System.out.println("Bootcamp Creation  !!!!");
 
                 List<User> user = new ArrayList<>();
                 List<Technology> technologyList = technologyRepository.findByName("React Js");
@@ -259,8 +260,7 @@ public class BusReservationSystemApplication {
 
 
 
-            } if(false
-            ) {
+            } if(false) {
 
 
                 //Create Admin and Passenger Roles

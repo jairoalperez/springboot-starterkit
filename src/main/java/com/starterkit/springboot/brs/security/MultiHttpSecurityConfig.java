@@ -52,6 +52,7 @@ public class MultiHttpSecurityConfig {
         protected void configure(HttpSecurity http) throws Exception {
 
            http .cors()
+
                    .and()
                    .csrf()
                     .disable()
@@ -59,6 +60,7 @@ public class MultiHttpSecurityConfig {
                     .authorizeRequests()
                     .antMatchers("/api/v1/user/signup").permitAll()
                    .antMatchers("/api/v1/user/authenticate").permitAll()
+//                   .antMatchers("/api/v1/bootcamp/getbootcampbyid").permitAll()
                     .anyRequest()
                     .authenticated()
                     .and()
@@ -126,6 +128,7 @@ public class MultiHttpSecurityConfig {
                     .antMatchers("/").permitAll()
                     .antMatchers("/login").permitAll()
                     .antMatchers("/signup").permitAll()
+//                    .antMatchers("/getbootcampbyid").permitAll()
                     .antMatchers("/dashboard/**").hasAuthority("ADMIN")
                     .anyRequest()
                     .authenticated()

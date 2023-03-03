@@ -39,6 +39,7 @@ public class BootcampMapper {
                 .setName(bootcamp.getName())
                 .setSessions(SessionMapper.toSessionList(bootcamp.getSessions()))
                 .setStartDate(bootcamp.getStartSate())
+
                 .setTechnologyStack(TechnologyStackMapper.toTechnologyStackList(bootcamp.getTechnologyStack()))
                 .setUsers(bootcamp.getUsers());
     }
