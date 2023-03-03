@@ -1,5 +1,6 @@
 package com.starterkit.springboot.brs.dto.mapper;
 
+import com.starterkit.springboot.brs.controller.v1.request.bootcamp.TechnologyRequest;
 import com.starterkit.springboot.brs.dto.model.bootcamp.SessionDto;
 import com.starterkit.springboot.brs.dto.model.bootcamp.TechnologyDto;
 import com.starterkit.springboot.brs.dto.model.user.RoleDto;
@@ -33,5 +34,20 @@ public class TechnologyStackMapper {
 
     public static List<Technology> toTechnologyStackList(List<TechnologyDto> technologyStack) {
         return null;
+    }
+
+    public static TechnologyDto toTechnologyDto(TechnologyRequest technologyRequest){
+        return new TechnologyDto()
+                .setId(technologyRequest.getId())
+                .setName(technologyRequest.getName())
+                .setVendorName(technologyRequest.getVendorName())
+                .setVersion(technologyRequest.getVersion());
+    }
+    public static Technology toTechnology(TechnologyRequest technologyRequest){
+        return new Technology()
+                .setId(technologyRequest.getId())
+                .setName(technologyRequest.getName())
+                .setVendorName(technologyRequest.getVendorName())
+                .setVersion(technologyRequest.getVersion());
     }
 }
