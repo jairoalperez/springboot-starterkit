@@ -27,6 +27,9 @@ public class Bootcamp {
     String name;
     Date startDate;
     Date endDate;
+    String bannerSmallImage;
+    String bannerLargeImage;
+    String bannerVideoLink;
     String description;
     String longHtml;
     @DBRef

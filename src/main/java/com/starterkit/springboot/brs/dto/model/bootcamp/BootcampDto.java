@@ -18,6 +18,9 @@ public class BootcampDto {
     String name;
     Date startSate;
     Date endDate;
+    String bannerSmallImage;
+    String bannerLargeImage;
+    String bannerVideoLink;
     String description;
     String longHtml;
     List<User> users;

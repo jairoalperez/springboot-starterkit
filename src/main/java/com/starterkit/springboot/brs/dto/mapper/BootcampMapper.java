@@ -22,6 +22,9 @@ public class BootcampMapper {
                 .setDescription(bootcamp.getDescription())
                 .setEndDate(bootcamp.getEndDate())
                 .setLongHtml(bootcamp.getLongHtml())
+                .setBannerSmallImage(bootcamp.getBannerSmallImage())
+                .setBannerLargeImage(bootcamp.getBannerLargeImage())
+                .setBannerVideoLink(bootcamp.getBannerVideoLink())
                 .setName(bootcamp.getName())
                 .setSessions(SessionMapper.toSessionDtoList(bootcamp.getSessions()))
                 .setStartSate(bootcamp.getStartDate())
@@ -37,9 +40,11 @@ public class BootcampMapper {
                 .setEndDate(bootcamp.getEndDate())
                 .setLongHtml(bootcamp.getLongHtml())
                 .setName(bootcamp.getName())
+                .setBannerSmallImage(bootcamp.getBannerSmallImage())
+                .setBannerLargeImage(bootcamp.getBannerLargeImage())
+                .setBannerVideoLink(bootcamp.getBannerVideoLink())
                 .setSessions(SessionMapper.toSessionList(bootcamp.getSessions()))
                 .setStartDate(bootcamp.getStartSate())
-
                 .setTechnologyStack(TechnologyStackMapper.toTechnologyStackList(bootcamp.getTechnologyStack()))
                 .setUsers(bootcamp.getUsers());
     }

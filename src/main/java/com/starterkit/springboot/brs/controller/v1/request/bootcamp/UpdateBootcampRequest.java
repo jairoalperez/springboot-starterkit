@@ -40,7 +40,18 @@ public class UpdateBootcampRequest {
     String description;
     @NotNull(message = "{constraints.NotEmpty.message}")
     String longHtml;
-    List<String> userIds; // ["fsdfsdfdsfsd",."fsdfsdfsdfsd"]
-    List<String> technologyStackIds;
-    List <String> sessionIds;
+    @JsonFormat(shape = JsonFormat.Shape.ARRAY)
+    String []userIds; // ["fsdfsdfdsfsd",."fsdfsdfsdfsd"]
+    @JsonFormat(shape = JsonFormat.Shape.ARRAY)
+    String [] technologyStackIds;
+    @JsonFormat(shape = JsonFormat.Shape.ARRAY)
+    String [] sessionIds;
+    @NotEmpty(message = "{constraints.NotEmpty.message}")
+    String bannerSmallImage;
+    @NotEmpty(message = "{constraints.NotEmpty.message}")
+    String bannerLargeImage;
+    @NotEmpty(message = "{constraints.NotEmpty.message}")
+    String bannerVideoLink;
+
+
 }

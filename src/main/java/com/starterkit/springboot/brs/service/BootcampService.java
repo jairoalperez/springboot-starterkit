@@ -122,13 +122,13 @@ public class BootcampService implements  IBootcampService {
         List<User> users = new ArrayList<>();
         List<Session> sessions = new ArrayList<>();
         List<Technology> technologies = new ArrayList<>();
-        userRepository.findAllById(bootcampRequest.getUserIds()).forEach(
+        userRepository.findAllById(Arrays.asList(bootcampRequest.getUserIds())).forEach(
                 x -> users.add(x)
         );
-        sessionRepository.findAllById(bootcampRequest.getSessionIds()).forEach(
+        sessionRepository.findAllById(Arrays.asList(bootcampRequest.getSessionIds())).forEach(
                 x -> sessions.add(x)
         );
-        technologyRepository.findAllById(bootcampRequest.getTechnologyStackIds()).forEach(
+        technologyRepository.findAllById(Arrays.asList(bootcampRequest.getTechnologyStackIds())).forEach(
                 x -> technologies.add(x)
         );
         Optional<Bootcamp> bootcamp = bootcampRepository.findById(bootcampRequest.getId());

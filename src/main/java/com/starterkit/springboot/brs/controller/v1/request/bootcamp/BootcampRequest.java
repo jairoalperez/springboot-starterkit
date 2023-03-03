@@ -36,9 +36,17 @@ public class BootcampRequest {
     @Temporal(TemporalType.DATE)
     Date endDate;
     @NotNull(message = "{constraints.NotEmpty.message}")
+    String bannerSmallImage;
+    String bannerLargeImage;
+    String bannerVideoLink;
+
+
+    @NotNull(message = "{constraints.NotEmpty.message}")
     String description;
     @NotNull(message = "{constraints.NotEmpty.message}")
     String longHtml;
+
+
     @Lazy
     List<User> users;
     List<TechnologyRequest> technologyStack;
