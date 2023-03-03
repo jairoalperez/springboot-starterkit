@@ -1,5 +1,6 @@
 package com.starterkit.springboot.brs.dto.mapper;
 
+import com.starterkit.springboot.brs.controller.v1.request.bootcamp.SessionRequest;
 import com.starterkit.springboot.brs.dto.model.bootcamp.SessionDto;
 import com.starterkit.springboot.brs.dto.model.user.RoleDto;
 import com.starterkit.springboot.brs.model.bootcamp.Session;
@@ -29,6 +30,13 @@ public class SessionMapper {
                 .setName(session.getName())
                 .setSessionDate(session.getSessionDate())
                 .setSessionItems( SessionItemMapper.toSessionList(session.getSessionItems()));
+    }
+    public static Session toSession(SessionRequest sessionRequest) {
+        return new Session()
+                .setId(sessionRequest.getId())
+                .setName(sessionRequest.getName())
+                .setSessionDate(sessionRequest.getSessionDate())
+                .setSessionItems( SessionItemMapper.toSessionListFreq(sessionRequest.getSessionItems()));
     }
 
     public static Role toRole(RoleDto role) {

@@ -1,10 +1,12 @@
 package com.starterkit.springboot.brs.dto.mapper;
 
+import com.starterkit.springboot.brs.controller.v1.request.bootcamp.SessionItemRequest;
 import com.starterkit.springboot.brs.dto.model.bootcamp.SessionDto;
 import com.starterkit.springboot.brs.dto.model.bootcamp.SessionItemDto;
 import com.starterkit.springboot.brs.dto.model.user.RoleDto;
 import com.starterkit.springboot.brs.model.bootcamp.Session;
 import com.starterkit.springboot.brs.model.bootcamp.SessionItem;
+import com.starterkit.springboot.brs.model.bootcamp.SessionType;
 import com.starterkit.springboot.brs.model.user.Role;
 import org.springframework.stereotype.Component;
 
@@ -39,6 +41,16 @@ public class SessionItemMapper {
 
     }
 
+    public static SessionItem toSession(SessionItemRequest session) {
+        SessionItem sessionItem = new SessionItem();
+        sessionItem.setId(session.getId())
+                .setName(session.getName())
+                .setDetails(session.getDetails())
+                .setSessionLink(session.getSessionLink())
+                .setSessionContentRecorded(session.getSessionContentRecorded());
+        return sessionItem;
+    }
+
     public static Role toRole(RoleDto role) {
         return new Role()
                 .setRole(role.getRole())
@@ -54,6 +66,12 @@ public class SessionItemMapper {
     }
 
     public static List<SessionItem> toSessionList(List<SessionItemDto> sessionItems) {
+        List<SessionItem> sessionItemDtos = new ArrayList<>();
+        sessionItems.stream().forEach(x -> sessionItemDtos.add(toSession(x)));
+        return sessionItemDtos;
+
+    }
+    public static List<SessionItem> toSessionListFreq(List<SessionItemRequest> sessionItems) {
         List<SessionItem> sessionItemDtos = new ArrayList<>();
         sessionItems.stream().forEach(x -> sessionItemDtos.add(toSession(x)));
         return sessionItemDtos;

@@ -1,5 +1,6 @@
 package com.starterkit.springboot.brs.service;
 
+import com.starterkit.springboot.brs.controller.v1.request.bootcamp.SessionRequest;
 import com.starterkit.springboot.brs.dto.model.bootcamp.BootcampDto;
 import com.starterkit.springboot.brs.dto.model.bootcamp.SessionDto;
 
@@ -13,4 +14,7 @@ public interface ISessionService {
     List<SessionDto> getByName(String name);
     List<SessionDto> getAllSessionsByUser(String email);
 
+    SessionDto createSession(SessionRequest sessionRequest);
+
+    SessionDto updateSession(SessionRequest sessionRequest);
 }

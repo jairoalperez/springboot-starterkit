@@ -1,15 +1,33 @@
 package com.starterkit.springboot.brs.controller.v1.request.bootcamp;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.starterkit.springboot.brs.model.bootcamp.SessionType;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotEmpty;
+
+@Getter
+@Setter
+@Accessors(chain = true)
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SessionItemRequest {
 
+    @NotEmpty(message = "{constraints.NotEmpty.message}")
     String id;
-    SessionType sessionType;
+    @NotEmpty(message = "{constraints.NotEmpty.message}")
+    String sessionType;
+    @NotEmpty(message = "{constraints.NotEmpty.message}")
     String name;
+    @NotEmpty(message = "{constraints.NotEmpty.message}")
     String details;
+    @NotEmpty(message = "{constraints.NotEmpty.message}")
     String sessionLink;
+    @NotEmpty(message = "{constraints.NotEmpty.message}")
     String sessionContentRecorded;
 
 }
