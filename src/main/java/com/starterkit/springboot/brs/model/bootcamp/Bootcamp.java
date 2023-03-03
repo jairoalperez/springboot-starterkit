@@ -34,5 +34,5 @@ public class Bootcamp {
     @DBRef
     List<Technology> technologyStack;
     @Embedded
-    List <Session> sessions;
+    List<Session> sessions;
 }

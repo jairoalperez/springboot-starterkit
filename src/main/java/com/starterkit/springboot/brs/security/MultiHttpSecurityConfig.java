@@ -52,14 +52,16 @@ public class MultiHttpSecurityConfig {
         protected void configure(HttpSecurity http) throws Exception {
 
            http .cors()
-                    .and()
+
+                   .and()
                    .csrf()
-                   .disable()
+                    .disable()
                     .antMatcher("/api/**")
                     .authorizeRequests()
                     .antMatchers("/api/v1/user/authenticate").permitAll()
                    .antMatchers("/api/v1/user/signup").permitAll()
                    .antMatchers("/api/v1/bootcamp/allbootcamps").permitAll()
+
                     .anyRequest()
                     .authenticated()
                     .and()

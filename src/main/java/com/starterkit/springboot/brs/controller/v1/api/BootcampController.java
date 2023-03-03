@@ -1,5 +1,6 @@
 package com.starterkit.springboot.brs.controller.v1.api;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.starterkit.springboot.brs.controller.v1.request.bootcamp.UpdateBootcampRequest;
 import com.starterkit.springboot.brs.dto.model.bootcamp.BootcampDto;
 import com.starterkit.springboot.brs.exception.LearnerDromeException;
@@ -9,10 +10,17 @@ import com.starterkit.springboot.brs.service.ITechnologyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 
 @RestController
@@ -37,6 +45,18 @@ public class BootcampController {
     }
 
 
+    @RequestMapping(value ="/getbootcampbyid", method = RequestMethod.POST)
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public ResponseEntity<?> getBootcampByIdn(@RequestBody @Valid RequestMes requestMes) {
+
+
+//        @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+//    public ResponseEntity getBootcampsById() {
+ //       return ResponseEntity.ok(bootcampService.getById("6400e882eea6663cea2b9699"));
+
+        return ResponseEntity.ok(bootcampService.getById(requestMes.bootcampId));
+    }
+
     @GetMapping("/allteches")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public ResponseEntity getAllTechnologies() {
@@ -49,7 +69,7 @@ public class BootcampController {
         return ResponseEntity.ok(sessionService.getAllSessions());
     }
 
-    @PutMapping(value = "updatebootcamp", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/updatebootcamp", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public  ResponseEntity updateProfile(@RequestBody BootcampDto bootcampDto){
         return ResponseEntity.ok( bootcampService.updateBootcamp(bootcampDto));
@@ -60,4 +80,20 @@ public class BootcampController {
     public  ResponseEntity addUserToBootcamp(@RequestBody UpdateBootcampRequest bootcampRequest) throws LearnerDromeException {
         return ResponseEntity.ok( bootcampService.updateUsersBootcamp(bootcampRequest));
     }
+
+
+    @Getter
+    @Setter
+    @Accessors(chain = true)
+    @NoArgsConstructor
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    private static class RequestMes {
+        @NotNull(message = "{constraints.NotEmpty.message}")
+        private String bootcampId;
+//        @NotNull(message = "{constraints.NotEmpty.message}")
+//        private String password;
+    }
+
 }
+
+

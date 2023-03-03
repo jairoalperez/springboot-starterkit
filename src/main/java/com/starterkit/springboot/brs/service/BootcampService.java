@@ -48,8 +48,24 @@ public class BootcampService implements  IBootcampService {
     }
 
     @Override
-    public Optional<BootcampDto> getById(String id) {
-        return Optional.empty();
+    public BootcampDto getById(String id) {
+
+        Optional<Bootcamp> bootcamp = bootcampRepository.findById(id);
+        if (bootcamp.isPresent()){
+            return BootcampMapper.toBootcampDto(bootcamp.get());
+            //List<Bootcamp> bootcamps = (List<Bootcamp>) bootcamp.get();
+//            for (Bootcamp b : bootcamps) {
+//                if (b.getId().equals(bootcampDto.getId())) {
+//                    Bootcamp bootcampToSave = BootcampMapper.toBootcamp(bootcampDto);
+//                    BootcampMapper.toBootcampDto(bootcampRepository.save(bootcampToSave));
+//                    return true;
+//                }
+            //}
+
+
+        }else { //BootcampDto bootcampDto = null;
+                return null;}
+       // return null///Optional.empty();
     }
 
     @Override
