@@ -40,7 +40,7 @@ public class BusReservationSystemApplication {
         return args -> {
 
 
-            if (false) {
+            if (true) {
                 System.out.println("Bootcamp Creation  !!!!");
 
                 List<User> user = new ArrayList<>();
@@ -112,7 +112,7 @@ public class BusReservationSystemApplication {
                 }
             }
 
-            if(false){
+            if(true){
 
                 Role participantRole = roleRepository.findByRole("PARTICIPANT");
                 if (participantRole == null) {
@@ -191,7 +191,7 @@ public class BusReservationSystemApplication {
                 System.out.println("The User was created !!!!!!!!!!!!!"+ userRepository.save(user));
             }
 
-            if (false){
+            if (true){
                 Role participantRole = roleRepository.findByRole("PARTICIPANT");
                 if (participantRole == null) {
                     participantRole = new Role();
@@ -260,7 +260,7 @@ public class BusReservationSystemApplication {
 
 
 
-            } if(false) {
+            } if(true) {
 
 
                 //Create Admin and Passenger Roles
